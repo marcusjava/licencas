@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="licencas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7b8bdb4-911f-4dd8-9c8a-39644b23d6a1">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="licencas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b7df0c7b-6e93-4f22-9ac8-3c863eea5713">
 	<queryString language="SQL">
 		<![CDATA[SELECT
      licenca.`lic_id` AS licenca_lic_id,
@@ -12,27 +9,26 @@ FROM
      `licenca` licenca]]>
 	</queryString>
 	<field name="licenca_lic_desc" class="java.lang.String"/>
-	<field name="licenca_lic_status" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
 	<title>
 		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="004af10a-0692-4588-a916-fd54fdaa7e63"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="88acb074-56cc-4701-90b4-7d181b37ae21"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="2ab89e4c-33a4-4751-b2a2-055ffb01546c"/>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="69654c55-2455-4b16-b8a5-19cb6b287e36"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Licenças Web]]></text>
+					<text><![CDATA[TITLE]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="dae869b3-25a2-4df0-8f28-b1317f76a65f"/>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="cb51dfed-b826-4080-b0aa-0f36d51d6668"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio de licenças]]></text>
+					<text><![CDATA[Add a description here]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -43,42 +39,28 @@ FROM
 	<columnHeader>
 		<band height="21">
 			<line>
-				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="56ffc64c-3d7d-42ad-a50b-a04e0c41601e"/>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="68d036d4-014e-4b7c-ae3b-6b90cfc2f56b"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1f44496e-c9a9-4d0b-96a9-b87c377a403e"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f9cda34d-2846-458d-8e5f-4a02ddd80e46"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descrição]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="277" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="61e9412c-1e52-4459-83ac-d480e64ba76c"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[STATUS]]></text>
+				<text><![CDATA[licenca_lic_desc]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="f8762501-51fe-419a-811a-57d8d762d650"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="a6732402-1d7b-4b93-945d-b3414c33d1ec"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="277" height="20" uuid="376de375-fa5f-42a7-bc8b-d0d2bcdad331"/>
+				<reportElement x="0" y="0" width="555" height="20" uuid="7e553fb0-c24d-4cff-8a21-205033565408"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{licenca_lic_desc}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="277" y="0" width="277" height="20" uuid="e70743f0-39be-4b1c-9404-2f16c8f41a2e"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{licenca_lic_status}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -88,16 +70,16 @@ FROM
 	<pageFooter>
 		<band height="17">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="f5766411-5276-4d33-86f7-a181eb0073c2"/>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="4e1efc8f-e220-4481-b716-5e423c325422"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="e84a40d3-5ffe-46a8-a29e-d093af475586"/>
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="1d3ac6b8-c35f-4e4c-a54c-e76312d17321"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13" uuid="ec89a880-783f-4b63-9621-ee5c9a76fb34"/>
+				<reportElement x="0" y="4" width="100" height="13" uuid="5937f176-e9e2-4a32-8e21-8c9c5814e050"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

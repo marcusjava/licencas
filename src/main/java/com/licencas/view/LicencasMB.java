@@ -98,7 +98,7 @@ public class LicencasMB implements Serializable{
         String login = external.getRemoteUser();
         Usuario usuario = usuariorn.buscaporlogin(login);
         String nomeRelatorioJasper ="licencas";
-        String nomeRelatorioSaida = usuario.getNome()+"_licencas";
+        String nomeRelatorioSaida = usuario.getLogin()+"_licencas";
         RelatorioUtil relatorio = new RelatorioUtil();
         HashMap parametros = new HashMap();
         parametros.put("codigousuario", usuario.getCodigo());

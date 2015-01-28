@@ -45,7 +45,6 @@ public class RelatorioUtil {
 			String caminhoRelatorio = context.getExternalContext().getRealPath("relatorios");
 			String caminhoArquivoJasper = caminhoRelatorio + File.separator + nomeRelatorioJasper + ".jasper";
 			String caminhoArquivoRelatorio = null;
-
 			JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(caminhoArquivoJasper);
 			JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, conexao);
 			JRExporter tipoArquivoExportado = null;
@@ -73,6 +72,7 @@ public class RelatorioUtil {
 					tipoArquivoExportado = new JRPdfExporter();
 					extensaoArquivoExportado = "pdf";
 					break;
+                                    
 			}
 			caminhoArquivoRelatorio = caminhoRelatorio + File.separator + nomeRelatorioSaida + "." + extensaoArquivoExportado;
 			arquivoGerado = new java.io.File(caminhoArquivoRelatorio);
@@ -84,9 +84,9 @@ public class RelatorioUtil {
 			InputStream conteudoRelatorio = new FileInputStream(arquivoGerado);
 			arquivoRetorno = new DefaultStreamedContent(conteudoRelatorio, "application/" + extensaoArquivoExportado, nomeRelatorioSaida + "." + extensaoArquivoExportado);
 		} catch (JRException e) {
-			throw new UtilException("N�o foi poss�vel gerar o relat�rio.", e);
+			throw new UtilException("Não foi possível gerar o relatorio.", e);
 		} catch (FileNotFoundException e) {
-			throw new UtilException("Arquivo do relat�rio n�o encontrado.", e);
+			throw new UtilException("Arquivo do relatório não encontrado.", e);
 		}
 		return arquivoRetorno;
 	}
@@ -99,7 +99,7 @@ public class RelatorioUtil {
 			javax.sql.DataSource ds = (javax.sql.DataSource) envContext.lookup("jdbc/LicencasDB");
 			conexao = (java.sql.Connection) ds.getConnection();
 		} catch (NamingException e) {
-			throw new UtilException("N�o foi poss�vel encontrar o nome da conex�o do banco.", e);
+			throw new UtilException("N�o foi possível encontrar o nome da conex�o do banco.", e);
 		} catch (SQLException e) {
 			throw new UtilException("Ocorreu um erro de SQL.", e);
 		}
