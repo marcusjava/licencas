@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            
+            <p:fieldset legend="Cadastrar Foros" id="fieldforo">
+                <br/>
+                <h:form id="formforo" >
+                    <p:growl id="msg" showDetail="true"/>
+                    <h:inputHidden value="#{foroMB.foro.id}"/>
+                    <h:panelGrid columns="2" styleClass="panelGrid" cellpadding="10">
+                        <p:outputLabel value="Comarca.:"/>
+                        <p:selectOneMenu  style="width: 300px" id="comarca" value="#{foroMB.foro.comarca.id}">
+                            <f:selectItem itemLabel="-Selecione uma Comarca" itemValue=""/>
+                            <f:selectItems var="com" value="#{comarcaMB.lista}" itemLabel="#{com.com_desc}" itemValue="#{com.id}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nome.:" id="Descrição"/>
+                        <p:inputText value="#{foroMB.foro.for_desc}" required="true" requiredMessage="Campo obrigatorio" size="45"/>
+                        <p:outputLabel value=""/>
+                        <p:panel>
+                            <p:commandButton action="#{foroMB.Salvar}" icon="ui-icon-disk" update="formforo :tabelaforo" value="Salvar"/>
+                            <p:commandButton action="#{foroMB.novo}" icon="ui-icon-cancel" value="Cancelar" update="@form"/>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+                    <br/>
+                <h:form id="tabelaforo">  
+                    <p:dataTable id="tbforo" var="f" value="#{foroMB.foros}" emptyMessage="Nenhum registro encontrado" filteredValue="#{foroMB.filtro_lista}" editable="true" paginator="true" rows="10" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                        <p:ajax event="rowEdit" listener="#{foroMB.onRowEdit}" update="tbforo :formforo:msg"/>
+                        <p:ajax event="rowEditCancel" listener="#{foroMB.onRowCancel}" update="tbforo :formforo:msg"/>
+                        <p:column headerText="ID" width="50">
+                            <h:outputText value="#{f.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{f.for_desc}" filterMatchMode="contains" headerText="Descrição" filterStyle="width: 200px" width="200">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{f.for_desc}"/></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{f.for_desc}" style="width:100%" label="Descricao"/></f:facet>
+                                </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Comarca" filterBy="#{f.comarca.com_desc}" filterMatchMode="contains" filterStyle="width: 200px" width="200">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{f.comarca.com_desc}"/></f:facet>
+                                    <f:facet name="input"><p:inputText  value="#{f.comarca.com_desc}" style=" width:100%" label="Descricao"/></f:facet>
+                                </p:cellEditor>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Editar">
+                                <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Excluir">
+                            <p:commandLink action="#{foroMB.deletar}" value="Excluir" immediate="true" update="tbforo :formforo:msg" >
+                                <f:setPropertyActionListener target="#{foroMB.foro}" value="#{f}"/>
+                            </p:commandLink>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Editar">
+                            <p:commandLink onclick="Editar.show()" value="Editar">
+                                <f:setPropertyActionListener target="#{foroMB.foro}" value="#{f}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                    
+                </h:form>
+                    <p:dialog header="Editar foro" widgetVar="Editar" resizable="false" showEffect="slide" width="400">
+                        <h:form prependId="false">
+                            <h:panelGrid id="editarforo" columns="2" style="margin-bottom: 10px">
+                                <h:outputText value="Descrição.:"/>
+                                <h:inputText value="#{f.for_desc}"/>
+                                <p:commandButton action="#{foroMB.editar}" update=":tabelaforo:tbforo" oncomplete="Editar.hide()" value="Salvar"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:dialog>
+            </p:fieldset>
+           
+            
+        </ui:define>
+</ui:composition>
+

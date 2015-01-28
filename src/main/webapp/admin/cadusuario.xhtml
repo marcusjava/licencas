@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="centro">
+        <p:fieldset legend="Cadastro de Usuarios" id="field_usuario">
+            <br/>
+            <h:form id="form_usuario">
+                <p:growl id="msgusuario"/>
+                <p:focus for="nome"/>
+                <h:inputHidden value="#{usuarioMB.usuario.codigo}"/>
+                <h:panelGrid columns="2" styleClass="panelGrid" cellpadding="10" id="panel_usuario">
+                    <h:outputText value="Nome"/>
+                    <p:inputText id="nome" value="#{usuarioMB.usuario.nome}" required="true" requiredMessage="Campo nome obrigatorio" />
+                    <h:outputText value="E-mail"/>
+                    <p:inputText value="#{usuarioMB.usuario.email}" required="true" requiredMessage="Campo email obrigatorio"/>
+                    <h:outputText value="Login"/>
+                    <p:inputText value="#{usuarioMB.usuario.login}" required="true" requiredMessage="Campo login obrigatorio"/>
+                    <h:outputText value="Senha"/>
+                    <p:password id="inpsenha" value="#{usuarioMB.senha}" redisplay="false" required="#{empty usuarioMB.usuario.senha}" requiredMessage="Campo senha obrigatorio!"/>
+                    <h:outputText value="Confirme a senha"/>
+                    <p:password value="#{usuarioMB.confirmasenha}" required="#{empty usuarioMB.usuario.senha}" requiredMessage="Confirme a senha!"/>
+                    <h:outputText value="Papel"/>
+                    <p:selectManyCheckbox id="basic" value="#{usuarioMB.papeis}" label="Papeis">
+                        <f:selectItem itemLabel="Usuario" itemValue="ROLE_USUARIO"/>
+                        <f:selectItem itemLabel="Administrador" itemValue="ROLE_ADMINISTRADOR"/>
+                    </p:selectManyCheckbox>
+                    <p:panel>
+                        <p:commandButton action="#{usuarioMB.Salvar}" icon="ui-icon-disk" update=":form_usuario msgusuario :tabela_usuario" value="Salvar"/>
+                        <p:commandButton type="reset" icon="ui-icon-cancel" value="Cancelar" update="form_usuario"/>
+                    </p:panel>
+                </h:panelGrid>
+            </h:form>
+            <h:form id="tabela_usuario" prependId="false">
+                <p:growl id="msgtabela" showDetail="false" />
+                <p:dataTable id="tabela" var="usu" value="#{usuarioMB.usuarios}" emptyMessage="Nenhum registro encontrado" filteredValue="#{usuarioMB.filtro_usuarios}" editable="true" paginator="true" rows="10" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Ativo" style="width:60px">
+                            <h:commandLink action="#{usuarioMB.ativar}">
+                                <h:graphicImage library="imagens" name="usuario_ativo_#{usu.ativo}.png" style="border: 0"/>
+                                <f:setPropertyActionListener target="#{usuarioMB.usuario}" value="#{usu}"/>
+                            </h:commandLink>
+                        </p:column>
+                        <p:column filterBy="#{usu.nome}" headerText="Nome"  filterMatchMode="contains" filterStyle="width: 400px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{usu.nome}"/></f:facet>
+                                <f:facet name="input"><p:inputText id="txtdesc" value="##{usu.nome}" style="width:100% " label="Nome"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{usu.login}" headerText="Login"  filterMatchMode="contains" filterStyle="width: 400px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{usu.login}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{usu.login}" style="width:100% " label="Login"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{usu.email}" headerText="Email"  filterMatchMode="contains" filterStyle="width: 400px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{usu.email}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{usu.email}" style="width:100% " label="Email"/></f:facet>
+                            </p:cellEditor>
+                        </p:column> 
+                        <p:column  headerText="Permissoes" style="width: 100px" >
+                            <h:graphicImage library="imagens" name="ROLE_ADMINISTRADOR_#{usu.permissao.contains('ROLE_ADMINISTRADOR')}.png"/>
+                            <h:graphicImage library="imagens" name="ROLE_USUARIO_#{usu.permissao.contains('ROLE_USUARIO')}.png"/>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Excluir">
+                            <h:commandLink action="#{usuarioMB.Excluir}" onclick="if (!confirm('Deseja realmente excluir #{usu.nome}?'))return false;">
+                                <h:graphicImage library="imagens" name="excluir16.png" style="border:0"/>
+                                <f:setPropertyActionListener target="#{usuarioMB.usuario}" value="#{usu}"/>
+                            </h:commandLink>
+                        </p:column>
+                         <p:column style="width: 8%" headerText="Alterar">
+                             <p:commandLink id="alterar" update=":form_usuario">
+                                 <h:graphicImage library="imagens" name="editar16.png" style="border: 0"/>
+                                 <f:setPropertyActionListener target="#{usuarioMB.usuario}" value="#{usu}"/>
+                             </p:commandLink>
+                         </p:column>
+                    </p:dataTable>
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+</ui:composition>

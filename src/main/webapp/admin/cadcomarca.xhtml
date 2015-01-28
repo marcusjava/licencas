@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            
+            <p:fieldset legend="Cadastrar comarcas" id="field">
+                <h:form id="form" prependId="false">
+                        <p:growl id="msg" showDetail="true"/>
+                        <p:focus for="txt_desc"/>
+                        <h:inputHidden value="#{comarcaMB.comarca.id}"/>
+                        <p:outputLabel value="Nome  "/>
+                        <p:inputText id="txt_desc" size="45" value="#{comarcaMB.comarca.com_desc}" required="true" requiredMessage="Campo obrigatorio" maxlength="45"/>&nbsp;
+                        <p:commandButton id="botao" action="#{comarcaMB.Salvar}" image="ui-icon ui-icon-disk" value="Salvar" update=":form :formtabela:tabela" />
+                 </h:form>       
+                <br/>
+                <h:form id="formtabela">
+                    <p:growl id="msg1" showDetail="true" autoUpdate="true"/>
+                    <p:dataTable id="tabela" var="com" value="#{comarcaMB.lista}" emptyMessage="Nenhum registro encontrado" filteredValue="#{comarcaMB.filtro_lista}" editable="true" paginator="true" rows="10" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        <p:ajax event="rowEdit" listener="#{comarcaMB.onRowEdit}" update="tabela :form:msg "/>
+                        <p:ajax event="rowEditCancel" listener="#{comarcaMB.onRowCancel}" update="tabela :form:msg"/>
+                        <p:column headerText="ID" width="50" >
+                            <h:outputText value="#{com.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{com.com_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 400px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{com.com_desc}"/></f:facet>
+                                <f:facet name="input"><p:inputText id="txtdesc" value="#{com.com_desc}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Editar">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Excluir">
+                            <p:commandLink action="#{comarcaMB.deletar}" value="Excluir" immediate="true" update=":form :formtabela:tabela">
+                                <f:setPropertyActionListener target="#{comarcaMB.comarca}" value="#{com}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                </p:fieldset>
+            
+        </ui:define>
+    </ui:composition>
+

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Sistema de Gerenciamento de Licenças</title>
+      
+    </h:head>
+    <h:body style="font-size: 11px">
+        <p:layout fullPage="true">
+            <p:layoutUnit position="west" style="width: 200" header="Menu" resizable="true"  collapsible="true">
+                    <h:form>
+                        <br/>
+                        Seja bem vindo #{request.remoteUser}
+                        <br/>
+                        <br/>
+                        <p:menu>
+                            <p:submenu label="Cadastros">
+                                <p:menuitem url="/admin/cadcomarca.xhtml" value="Comarca"/>
+                                <p:menuitem url="/admin/cadforo.xhtml" value="Foro"/>
+                                <p:menuitem url="/admin/cadlocal.xhtml" value="Local"/>
+                                <p:menuitem url="/admin/cadlicencas.xhtml" value="Licenças"/>
+                                <p:menuitem url="/admin/cadusuario.xhtml" value="Usuarios"/>
+                            </p:submenu>
+                            <p:submenu label="Licenças">
+                                <p:menuitem url="/restrict/loclicenca.xhtml"  value="Licença ao local"/>
+                                <p:menuitem url="/restrict/liblicenca.xhtml" value="Liberar licença"/>
+                                <p:menuitem url="/restrict/liblicenca.xhtml" value="Licenças"/>
+                            </p:submenu>
+                            <p:submenu label="Relatorios">
+                                <p:menuitem url="/restrict/relatorios.xhtml" value="Licenças"/>
+                            </p:submenu>
+                        </p:menu>
+                        <br/>
+                        <br/>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                            <h:outputText value="Sair" style="alignment-adjust: middle;position: absolute;bottom: 10px;float: left;color: #8B0000;border-radius: 5px;padding: 5px 20px;text-decoration: none;width: 75%;text-align: center;"/>
+                        </h:outputLink>
+                    </h:form>
+            </p:layoutUnit> 
+            <p:layoutUnit position="center" header="Sistema">
+                <ui:insert name="centro">
+                    
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+       
+    </h:body>
+</html>
+

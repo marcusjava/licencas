@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro locais" id="fieldlocal">
+                <h:form id="form_local">
+                    <p:growl id="msglocal" showDetail="true"/>
+                    <br/>
+                    <h:panelGrid columns="2" styleClass="panelGrid" cellpadding="10" id="panellocal">
+                        <h:outputLabel value="Comarca.:"/>
+                        <p:selectOneMenu id="cbcomarca" value="#{localMB.comarca.id}" style="width: 300px">
+                            <f:selectItem itemLabel="Selecione comarca" itemValue=""/>
+                            <f:selectItems var="com" value="#{comarcaMB.lista}" itemLabel="#{com.com_desc}" itemValue="#{com.id}"/>
+                            <p:ajax update="cbforo" listener="#{localMB.selecionaForo}" event="change" process="cbcomarca"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Foro.:"/>
+                        <p:selectOneMenu id="cbforo" value="#{localMB.local.foro.id}" style= "width: 300px">
+                            <f:selectItem itemLabel="Selecione foro" itemValue=""/>
+                            <f:selectItems var="foro"   value="#{localMB.comboforos}" itemLabel="#{foro.for_desc}" itemValue="#{foro.id}"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Descrição.:"/>
+                        <p:inputText value="#{localMB.local.loc_desc}" style="width:400px" required="true" requiredMessage="Campo obrigatorio" size="60" maxlength="60"/>
+                        <h:outputLabel value="Nome computador.:"/>
+                        <p:inputText value="#{localMB.local.loc_nome_comp}" size="20" maxlength="20" onkeyup="this.value = this.value.toUpperCase()" />
+                        <h:outputLabel value="Patrimonio computador.:"/>
+                        <p:inputText value="#{localMB.local.loc_pat_comp}"  size="10" maxlength="10"/>
+                        <h:outputText value=""/>
+                        <p:panel>
+                            <p:commandButton action="#{localMB.Salvar}" value="Salvar" icon="ui-icon-disk" update=":form_local :tabela_local"/>
+                            <p:commandButton type="reset" icon="ui-icon-cancel" value="Cancelar" update="@form"/>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+                <br/>
+                <h:form id="tabela_local">
+                    <p:dataTable id="tb_local" var="loc" value="#{localMB.locais}" emptyMessage="Nenhum registro encontrado" filteredValue="#{localMB.locais_filtro}" editable="true" paginator="true" rows="8" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        <p:ajax event="rowEdit" listener="#{localMB.onRowEdit}" update="tb_local :form_local:msglocal "/>
+                        <p:ajax event="rowEditCancel" listener="#{localMB.onRowCancel}" update="tb_local :form_local:msglocal"/>
+                        <p:column headerText="ID" width="25" >
+                            <h:outputText value="#{loc.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{loc.foro.for_desc}" headerText="Foro"  filterMatchMode="contains" filterStyle="width: 200px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{loc.foro.for_desc}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{loc.foro.for_desc}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{loc.loc_desc}" headerText="Desc."  filterMatchMode="contains" filterStyle="width: 200px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{loc.loc_desc}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{loc.loc_desc}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{loc.loc_nome_comp}" headerText="Comp."  filterMatchMode="contains" filterStyle="width: 200px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{loc.loc_nome_comp}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{loc.loc_nome_comp}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{loc.loc_pat_comp}" headerText="Pat."  filterMatchMode="contains" filterStyle="width: 100px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{loc.loc_pat_comp}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{loc.loc_pat_comp}" style="width:50% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column style="width: 5%" headerText="Editar">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width: 5%" headerText="Excluir">
+                            <p:commandLink action="#{localMB.Deletar}" value="Excluir" immediate="true" update="tb_local :form_local">
+                                <f:setPropertyActionListener target="#{localMB.localselec}" value="#{loc}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+</ui:composition>
+

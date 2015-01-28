@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            <p:fieldset legend="Liberar licença">
+                <h:form id="form_liblicenca"> 
+                <p:growl id="msglic" showDetail="true"/>
+                <br/>
+                <p:dataTable id="tb_licenca" var="lic" value="#{licencasMB.ativadas}" emptyMessage="Nenhum registro encontrado" filteredValue="#{licencasMB.filtro_ativadas}" editable="true" paginator="true" rows="8" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="ID" width="50" >
+                                <h:outputText value="#{lic.id}"/>
+                            </p:column>
+                    <p:column style="width: 30%" filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 200px">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{lic.lic_desc}"/></f:facet>
+                                    <f:facet name="input"><p:inputText  value="#{lic.lic_desc}" style="width:100% " label="Descricao"/></f:facet>
+                                </p:cellEditor>
+                    </p:column>
+                    <p:column style="width: 35%" filterBy="#{lic.local.loc_desc}" headerText="Local"  filterMatchMode="contains" filterStyle="width: 200px">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{lic.local.loc_desc}"/></f:facet>
+                                    <f:facet name="input"><p:inputText  value="#{lic.local.loc_desc}" style="width:100% " label="Descricao"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                    
+                    <p:column style="width: 25%" filterBy="#{lic.status}" headerText="Licença"  filterMatchMode="contains" filterStyle="width: 200px">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{lic.status}"/></f:facet>
+                                    <f:facet name="input"><p:inputText  value="#{lic.status}" style="width:100% " label="Descricao"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width: 8%" headerText="Liberar">
+                                <p:commandLink action="#{licencasMB.Liberar}" value="Liberar" immediate="true" update="tb_licenca form_liblicenca">
+                                    <f:setPropertyActionListener target="#{licencasMB.selecionada}" value="#{lic}"/>
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+    </ui:composition>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body onload="document.content.dialog.j_username.focus()" style="background-color: black">
+        <p:dialog header="Login" visible="true" closable="false" draggable="true" resizable="false" width="420">
+            <center>
+                <h:outputText value="Ocorreu um erro entre em contato com o administrador" rendered="#{!empty param.login_error}" style="color: darkred"/>
+            </center>
+            <form id="login" action="#{request.contextPath}/j_spring_security_check" method="post">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="j_username" value="Username: " />
+                    <h:inputText id="j_username" required="true"/>
+                    <h:outputLabel for="j_password" value="Password: " />
+                    <h:inputSecret id="j_password" required="true"/>
+                    <h:commandButton value="Login"/>
+                    <input type="checkbox" name="_j_spring_security_remember_me"/> Entrar automaticamente
+                </h:panelGrid>
+            </form>
+        </p:dialog>
+    </h:body>
+</html>
+
