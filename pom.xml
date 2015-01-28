@@ -14,7 +14,6 @@
         <jsf.version>2.1.7</jsf.version>
         <jstl.version>1.2</jstl.version>
         <mysql.version>5.1.9</mysql.version>
-        <groovy-all.version>1.7.5</groovy-all.version>
         <hibernate.version>4.0.1.Final</hibernate.version>
         <slf4j.version>1.6.4</slf4j.version>
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>   
@@ -164,6 +163,11 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
@@ -179,10 +183,11 @@
         </dependency>
         
         <!--  JasperReports -->
+        
         <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-            <version>4.6.0</version>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.lowagie</groupId>
@@ -194,17 +199,8 @@
             <artifactId>poi</artifactId>
             <version>3.9</version>
         </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-fonts</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>1.7.5</version>
-            <type>jar</type>
-        </dependency>
+        
+
 
         <!-- ############## JSF-IMPL ############### -->
         <dependency>
