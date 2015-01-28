@@ -38,7 +38,7 @@ public class LicencasRN {
            {
                 licenca.setStatus("DESATIVADA");
                 licencaDAO().save(licenca);
-                return "LicenÃ§a salva com sucesso!";
+                return "LicenÃƒÂ§a salva com sucesso!";
            }catch(HibernateException e)
            {
                return "Ocorreu um erro:" + e.getMessage();
@@ -50,7 +50,7 @@ public class LicencasRN {
            {
                
             licencaDAO().merge(licenca);
-            return "LicenÃ§a atualizada com sucesso!";
+            return "LicenÃƒÂ§a atualizada com sucesso!";
            }catch(HibernateException e)
            {
                return "Ocorreu um erro:" + e.getMessage();
@@ -92,7 +92,7 @@ public class LicencasRN {
             selecionada.getLocal().setLicenca(null);
             return addLicencas(selecionada);
         }
-       return "ERRO LicenÃ§a jÃ¡ se encontra desativada!";
+       return "ERRO Licença já se encontra desativada!";
    }
            
    

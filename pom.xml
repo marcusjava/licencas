@@ -182,7 +182,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>3.7.5</version>
+            <version>4.6.0</version>
         </dependency>
         <dependency>
             <groupId>com.lowagie</groupId>
@@ -206,10 +206,6 @@
             <type>jar</type>
         </dependency>
 
-
-        
-        
-        
         <!-- ############## JSF-IMPL ############### -->
         <dependency>
             <groupId>com.sun.faces</groupId>
