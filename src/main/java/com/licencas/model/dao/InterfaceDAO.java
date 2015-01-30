@@ -30,6 +30,6 @@ public interface InterfaceDAO<T> {
     //busca por login do usuario SpringSecutity
     Usuario buscaporlogin(String login);
     //pesquisa pelo campo unico descrição
-    Licencas buscaporlienca(String desc);
+    Licencas buscaporlicenca(String desc);
     
 }

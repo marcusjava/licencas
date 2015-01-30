@@ -159,7 +159,7 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
     }
 
     @Override
-    public Licencas buscaporlienca(String desc) {
+    public Licencas buscaporlicenca(String desc) {
         String hql = "Select l from Licencas l where l.lic_desc = :desc";
         Query consulta = this.session.createQuery(hql);
         consulta.setString("desc", desc);

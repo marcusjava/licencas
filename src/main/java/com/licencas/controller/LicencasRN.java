@@ -10,9 +10,6 @@ import com.licencas.model.dao.InterfaceDAO;
 import com.licencas.model.entities.Licencas;
 import com.licencas.util.FacesContextUtil;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.persistence.PersistenceException;
 import org.hibernate.HibernateException;
 
 /**
@@ -34,8 +31,8 @@ public class LicencasRN {
      public String addLicencas(Licencas licenca)
    {
        //Pesquisa para verificar os campos unicos
-       Licencas campounico = licencaDAO().buscaporlienca(licenca.getLic_desc());
-       if(!campounico.getLic_desc().equals(licenca.getLic_desc()))
+       Licencas campounico = licencaDAO().buscaporlicenca(licenca.getLic_desc());
+       if(campounico == null)
        {
             if (licenca.getId() == null || licenca.getId() == 0 )
             {
