@@ -157,6 +157,14 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
         consulta.setString("login", login);
         return (Usuario) consulta.uniqueResult();
     }
+
+    @Override
+    public Licencas buscaporlienca(String desc) {
+        String hql = "Select l from Licencas l where l.lic_desc = :desc";
+        Query consulta = this.session.createQuery(hql);
+        consulta.setString("desc", desc);
+        return (Licencas) consulta.uniqueResult();
+    }
 }
 
     

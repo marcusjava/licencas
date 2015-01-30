@@ -23,7 +23,7 @@ public class Licencas implements Serializable{
     @Column(name = "lic_id")
     private Integer id;
     
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false,unique = true,length = 16)
     private String lic_desc;
     
     @Column(name = "lic_status",nullable = false)

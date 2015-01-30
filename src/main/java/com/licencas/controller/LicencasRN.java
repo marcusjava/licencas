@@ -12,6 +12,7 @@ import com.licencas.util.FacesContextUtil;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 import org.hibernate.HibernateException;
 
 /**
@@ -32,31 +33,40 @@ public class LicencasRN {
      }
      public String addLicencas(Licencas licenca)
    {
-       if (licenca.getId() == null || licenca.getId() == 0 )
+       //Pesquisa para verificar os campos unicos
+       Licencas campounico = licencaDAO().buscaporlienca(licenca.getLic_desc());
+       if(!campounico.getLic_desc().equals(licenca.getLic_desc()))
        {
-           try
-           {
-                licenca.setStatus("DESATIVADA");
-                licencaDAO().save(licenca);
-                return "LicenÃƒÂ§a salva com sucesso!";
-           }catch(HibernateException e)
-           {
-               return "Ocorreu um erro:" + e.getMessage();
-           }
-       }
-       else
+            if (licenca.getId() == null || licenca.getId() == 0 )
+            {
+                try
+                {
+                     licenca.setStatus("DESATIVADA");
+                     licencaDAO().save(licenca);
+                     return "Licença salva com sucesso!";
+                }catch(Exception e)
+                {
+                    return "Ocorreu um erro: " + e.getMessage();
+                }
+            }
+            else
+            {
+               try
+               {
+
+                licencaDAO().merge(licenca);
+                return "Licenca atualizada com sucesso!";
+               }catch(Exception e)
+               {
+                   return "Ocorreu um erro:" + e.getMessage();
+               }
+
+             }
+       }else
        {
-           try
-           {
-               
-            licencaDAO().merge(licenca);
-            return "LicenÃƒÂ§a atualizada com sucesso!";
-           }catch(HibernateException e)
-           {
-               return "Ocorreu um erro:" + e.getMessage();
-           }
-           
+           return "Esta licença já está cadastrada!";
        }
+     
    }
    public String deleteLicencas(Licencas licenca)
    {
