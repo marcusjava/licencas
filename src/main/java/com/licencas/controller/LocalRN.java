@@ -43,13 +43,18 @@ public class LocalRN {
    {
        if (local.getId() == null || local.getId() == 0 )
        {
-           try
+           if(!pesqcampounico(local))
+                try
+                {
+                   LocalDAO().save(local);
+                   return "Local salvo com sucesso!";
+                }catch(HibernateException e)
+                {
+                    return "Ocorreu um erro:" + e.getMessage();
+                }
+           else
            {
-              LocalDAO().save(local);
-              return "Local salvo com sucesso!";
-           }catch(HibernateException e)
-           {
-               return "Ocorreu um erro:" + e.getMessage();
+               return "Local já cadastrado!";
            }
        }
        else
@@ -64,6 +69,12 @@ public class LocalRN {
            }
            
        }
+   }
+    private boolean pesqcampounico(Local local)
+   {
+       String hql = "Select l from Local l where l.loc_desc = :desc";
+       Local campounico = LocalDAO().getCampoUnico(hql, local.getLoc_desc());
+       return campounico != null;
    }
   
    public String deleteLocal(Local local)

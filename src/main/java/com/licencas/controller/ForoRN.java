@@ -7,12 +7,9 @@ package com.licencas.controller;
 
 import com.licencas.model.dao.HibernateDAO;
 import com.licencas.model.dao.InterfaceDAO;
-import com.licencas.model.entities.Comarca;
 import com.licencas.model.entities.Foro;
 import com.licencas.util.FacesContextUtil;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 
 /**
@@ -31,16 +28,23 @@ public class ForoRN {
     }
     public String addForo(Foro foro)
    {
+       
        if (foro.getId() == null || foro.getId() == 0)
        {
-           try
-           {
-                foroDAO().save(foro);
-                return "Foro salvo com sucesso!";
-           }catch(HibernateException e)
-           {
-               return "Ocorreu um erro" + e.getMessage();
-           }
+           if(!pesqcampounico(foro))
+            {
+                try
+                {
+                     foroDAO().save(foro);
+                     return "Foro salvo com sucesso!";
+                }catch(HibernateException e)
+                {
+                    return "Ocorreu um erro" + e.getMessage();
+                }
+            }else
+            {
+                return "Esta comarca já está cadastrada!";
+            }
        }
        else
        {
@@ -54,6 +58,13 @@ public class ForoRN {
            }
        }
        
+       
+   }
+    private boolean pesqcampounico(Foro foro)
+   {
+       String hql = "Select f from Foro f where f.for_desc = :desc";
+       Foro campounico = foroDAO().getCampoUnico(hql, foro.getFor_desc());
+       return campounico != null;
    }
   
    public String deleteForo(Foro foro)

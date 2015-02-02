@@ -30,22 +30,26 @@ public class LicencasRN {
      }
      public String addLicencas(Licencas licenca)
    {
-       //Pesquisa para verificar os campos unicos
-       Licencas campounico = licencaDAO().buscaporlicenca(licenca.getLic_desc());
-       if(campounico == null)
-       {
+       
             if (licenca.getId() == null || licenca.getId() == 0 )
             {
-                try
+                //Pesquisa para verificar os campos unicos
+                if(!pesqcampounico(licenca))
                 {
-                     licenca.setStatus("DESATIVADA");
-                     licencaDAO().save(licenca);
-                     return "Licença salva com sucesso!";
-                }catch(Exception e)
-                {
-                    return "Ocorreu um erro: " + e.getMessage();
+                    try
+                    {
+                         licenca.setStatus("DESATIVADA");
+                         licencaDAO().save(licenca);
+                         return "Licença salva com sucesso!";
+                    }catch(Exception e)
+                    {
+                        return "Ocorreu um erro: " + e.getMessage();
+                    }
+                }else
+                   {
+                       return "Esta licença já está cadastrada!";
+                   }
                 }
-            }
             else
             {
                try
@@ -59,11 +63,15 @@ public class LicencasRN {
                }
 
              }
-       }else
-       {
-           return "Esta licença já está cadastrada!";
-       }
+       
      
+   }
+     //VERIFICA SE A LICENÇA JA EXISTE
+   private boolean pesqcampounico(Licencas licenca)
+   {
+       String hql = "Select l from Licencas l where l.lic_desc = :desc";
+       Licencas campounico = licencaDAO().getCampoUnico(hql, licenca.getLic_desc());
+       return campounico != null;
    }
    public String deleteLicencas(Licencas licenca)
    {

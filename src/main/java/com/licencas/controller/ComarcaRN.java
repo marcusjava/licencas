@@ -19,7 +19,6 @@ import org.hibernate.HibernateException;
 public class ComarcaRN {
    
    private List<Comarca> comarcas;
-   private String mensagem;
    
    private InterfaceDAO<Comarca> comarcaDAO()
    {
@@ -28,46 +27,60 @@ public class ComarcaRN {
    }
    public String Salvar(Comarca comarca)
    {
-       if (comarca.getId() == null || comarca.getId() == 0 )
-       {
-           try
-           {
-              comarcaDAO().save(comarca);
-              mensagem = "Usuario salvo com sucesso!";
-           }catch(HibernateException e)
-           {
-               mensagem = "Ocorreu um erro:" + e.getMessage();
-           }
-           catch(Exception e )
-           {
-               mensagem = "Ocorreu um erro:" + e.getMessage();
-           }
-       }
-       else
-       {
-           try
-           {
-                comarcaDAO().update(comarca);
-                mensagem = "Usuario atualizado com sucesso!";
-           }catch(HibernateException e)
-           {
-               mensagem = "Ocorreu um erro:" + e.getMessage();
-           }
-       }
-       return mensagem;
+       
+       
+         if (comarca.getId() == null || comarca.getId() == 0 )
+            {
+                //pesquisar se campo unico descrição ja existe
+                 if(!pesqcampounico(comarca))
+                {
+                    try
+                    {
+                       comarcaDAO().save(comarca);
+                       return "Comarca salva com sucesso!";
+                    }catch(HibernateException e)
+                    {
+                        return "Ocorreu um erro:" + e.getMessage();
+                    }
+                    catch(Exception e )
+                    {
+                        return "Ocorreu um erro:" + e.getMessage();
+                    }
+                }else
+                    {
+                        return "Esta comarca já está cadastrada!";
+                    }
+            }
+            else
+            {
+                try
+                {
+                     comarcaDAO().update(comarca);
+                     return "Comarca atualizada com sucesso!";
+                }catch(HibernateException e)
+                {
+                    return "Ocorreu um erro:" + e.getMessage();
+                }
+            }
+       
+       
    }
-      
+   private boolean pesqcampounico(Comarca comarca)
+   {
+       String hql = "Select c from Comarca c where c.com_desc = :desc";
+       Comarca campounico = comarcaDAO().getCampoUnico(hql, comarca.getCom_desc());
+       return campounico != null;
+   }
    public String deleteComarca(Comarca comarca)
    {
        try
        {
             comarcaDAO().remove(comarca);
-            mensagem = "Comarca excluida com sucesso";
+            return "Comarca excluida com sucesso";
        }catch(HibernateException e)
        {
-           mensagem = "Ocorreu um erro:" + e.getMessage();
+           return "Ocorreu um erro:" + e.getMessage();
        }
-       return mensagem;
    }
    public List<Comarca> todas()
    {

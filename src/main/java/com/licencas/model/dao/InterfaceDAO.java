@@ -1,5 +1,6 @@
 package com.licencas.model.dao;
 
+import com.licencas.model.entities.Comarca;
 import com.licencas.model.entities.Foro;
 import com.licencas.model.entities.Licencas;
 import com.licencas.model.entities.Local;
@@ -29,7 +30,10 @@ public interface InterfaceDAO<T> {
     List<T> getListDesativadas(String query);
     //busca por login do usuario SpringSecutity
     Usuario buscaporlogin(String login);
-    //pesquisa pelo campo unico descrição
+    //pesquisa licença pelo campo unico descrição
     Licencas buscaporlicenca(String desc);
+    //pesquisa comarca pelo campo unico descrição
+    Comarca buscacomarca(String desc);
+    T getCampoUnico(String hql,String desc);
     
 }

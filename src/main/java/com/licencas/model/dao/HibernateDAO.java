@@ -1,5 +1,6 @@
 package com.licencas.model.dao;
 
+import com.licencas.model.entities.Comarca;
 import com.licencas.model.entities.Foro;
 import com.licencas.model.entities.Licencas;
 import com.licencas.model.entities.Local;
@@ -164,6 +165,21 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
         Query consulta = this.session.createQuery(hql);
         consulta.setString("desc", desc);
         return (Licencas) consulta.uniqueResult();
+    }
+
+    @Override
+    public Comarca buscacomarca(String desc) {
+        String hql = "Select c from Comarca c where c.com_desc = :desc";
+        Query consulta = this.session.createQuery(hql);
+        consulta.setString("desc", desc);
+        return (Comarca) consulta.uniqueResult();
+    }
+
+    @Override
+    public T getCampoUnico(String hql, String desc) {
+        Query consulta = this.session.createQuery(hql);
+        consulta.setString("desc", desc);
+        return (T) consulta.uniqueResult();
     }
 }
 
