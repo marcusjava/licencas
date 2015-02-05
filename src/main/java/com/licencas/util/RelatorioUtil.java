@@ -1,5 +1,7 @@
 package com.licencas.util;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +9,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
@@ -36,7 +39,7 @@ public class RelatorioUtil {
 	public static final int	RELATORIO_HTML= 3;
 	public static final int	RELATORIO_PLANILHA_OPEN_OFFICE=4;
 
-	public StreamedContent geraRelatorio(HashMap parametrosRelatorio, String nomeRelatorioJasper, String nomeRelatorioSaida, int tipoRelatorio) throws UtilException {
+	public StreamedContent geraRelatorio(HashMap parametrosRelatorio, String nomeRelatorioJasper, String nomeRelatorioSaida, int tipoRelatorio,List lista) throws UtilException {
 		StreamedContent arquivoRetorno = null;
 
 		try {
@@ -44,10 +47,10 @@ public class RelatorioUtil {
 			Connection conexao = this.getConexao();
 			String caminhoRelatorio = context.getExternalContext().getRealPath("relatorios");
 			String caminhoArquivoJasper = caminhoRelatorio + File.separator + nomeRelatorioJasper + ".jasper";
-                        File file = new File(caminhoArquivoJasper);
-                        file = file.getAbsoluteFile();
+                        //File file = new File(caminhoArquivoJasper);
+                       // file = file.getAbsoluteFile();
                         String caminhoArquivoRelatorio = null;
-			JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(file);
+			JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(caminhoArquivoJasper);
 			JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, conexao);
 			JRExporter tipoArquivoExportado = null;
 			String extensaoArquivoExportado = "";
@@ -86,9 +89,9 @@ public class RelatorioUtil {
 			InputStream conteudoRelatorio = new FileInputStream(arquivoGerado);
 			arquivoRetorno = new DefaultStreamedContent(conteudoRelatorio, "application/" + extensaoArquivoExportado, nomeRelatorioSaida + "." + extensaoArquivoExportado);
 		} catch (JRException e) {
-			throw new UtilException("Não foi possível gerar o relatorio.", e);
+			throw new UtilException("NÃ£o foi possÃ­vel gerar o relatorio.",e);
 		} catch (FileNotFoundException e) {
-			throw new UtilException("Arquivo do relatório não encontrado.", e);
+			throw new UtilException("Arquivo do relatÃ³rio nÃ£o encontrado.", e);
 		}
 		return arquivoRetorno;
 	}
@@ -101,10 +104,11 @@ public class RelatorioUtil {
 			javax.sql.DataSource ds = (javax.sql.DataSource) envContext.lookup("jdbc/LicencasDB");
 			conexao = (java.sql.Connection) ds.getConnection();
 		} catch (NamingException e) {
-			throw new UtilException("N�o foi possível encontrar o nome da conex�o do banco.", e);
+			throw new UtilException("Nï¿½o foi possÃ­vel encontrar o nome da conexï¿½o do banco.", e);
 		} catch (SQLException e) {
 			throw new UtilException("Ocorreu um erro de SQL.", e);
 		}
 		return conexao;
 	}
+       
 }

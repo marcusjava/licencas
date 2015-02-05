@@ -10,6 +10,7 @@
         <ui:define name="centro">
             <p:fieldset legend="Liberar licença">
                 <h:form id="form_liblicenca"> 
+                    <h:inputHidden value="#{licencasMB.licenca.id}"/>
                 <p:growl id="msglic" showDetail="true"/>
                 <br/>
                 <p:dataTable id="tb_licenca" var="lic" value="#{licencasMB.ativadas}" emptyMessage="Nenhum registro encontrado" filteredValue="#{licencasMB.filtro_ativadas}" editable="true" paginator="true" rows="8" 
@@ -39,7 +40,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column style="width: 8%" headerText="Liberar">
-                                <p:commandLink action="#{licencasMB.Liberar}" value="Liberar" immediate="true" update="tb_licenca form_liblicenca">
+                                <p:commandLink action="#{licencasMB.Liberar}" value="Liberar" immediate="true" update=":form_liblicenca">
                                     <f:setPropertyActionListener target="#{licencasMB.selecionada}" value="#{lic}"/>
                                 </p:commandLink>
                             </p:column>

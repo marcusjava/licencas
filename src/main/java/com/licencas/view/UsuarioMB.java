@@ -111,7 +111,7 @@ public class UsuarioMB implements Serializable{
     {
         FacesContext context = FacesContext.getCurrentInstance();
         UsuarioRN usuariorn = new UsuarioRN();
-                if(senha.equals(confirmasenha) && usuario.isAtivo())
+                if(senha.equals(confirmasenha))
                 {
                     if(!senha.isEmpty())
                     {

@@ -43,7 +43,7 @@ public class ForoRN {
                 }
             }else
             {
-                return "Esta comarca já está cadastrada!";
+                return "Este foro já está cadastrado!";
             }
        }
        else

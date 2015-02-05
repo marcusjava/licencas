@@ -7,6 +7,7 @@ import com.licencas.model.entities.Licencas;
 import com.licencas.model.entities.Local;
 import com.licencas.model.entities.Usuario;
 import com.licencas.util.RelatorioUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.StreamedContent;
@@ -65,8 +67,7 @@ public class LicencasMB implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         LicencasRN licencarn = new LicencasRN();
         mensagem = licencarn.addLicencas(licenca);
-        FacesMessage msg = new FacesMessage(mensagem);
-        context.addMessage(null,msg );
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         novo();
     }
     public void deletar()
@@ -74,8 +75,7 @@ public class LicencasMB implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         LicencasRN licencarn = new LicencasRN();
         mensagem = licencarn.deleteLicencas(this.licenca);
-        FacesMessage msg = new FacesMessage(mensagem);
-        context.addMessage(null,msg );
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         novo();
     }
        
@@ -84,8 +84,7 @@ public class LicencasMB implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         LicencasRN licencarn = new LicencasRN();
         mensagem = licencarn.Liberar(selecionada);
-        FacesMessage msg = new FacesMessage(mensagem);
-        context.addMessage(null,msg );
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         novo();
     }
     //JasperReports
@@ -104,15 +103,20 @@ public class LicencasMB implements Serializable{
         parametros.put("codigousuario", usuario.getCodigo());
         try
         {
-            this.arquivoretorno = relatorio.geraRelatorio(parametros, nomeRelatorioJasper, nomeRelatorioSaida, tiporelatorio);
+            this.arquivoretorno = relatorio.geraRelatorio(parametros, nomeRelatorioJasper, nomeRelatorioSaida, tiporelatorio,licencas);
         }catch(Exception e)
         {
             mensagem = e.getMessage();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
+            return null;
         }
-        context.addMessage(null,msg );
         return this.arquivoretorno;
     }
+    public void imprimirRelatorio() throws Exception{  
 
+        
+  
+}   
     public void setArquivoretorno(StreamedContent arquivoretorno) {
         this.arquivoretorno = arquivoretorno;
     }

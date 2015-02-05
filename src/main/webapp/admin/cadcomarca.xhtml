@@ -11,7 +11,7 @@
             
             <p:fieldset legend="Cadastrar comarcas" id="field">
                 <h:form id="form" prependId="false">
-                        <p:growl id="msg" showDetail="true"/>
+                    <p:growl id="msg" showDetail="true" autoUpdate="true"/>
                         <p:focus for="txt_desc"/>
                         <h:inputHidden value="#{comarcaMB.comarca.id}"/>
                         <p:outputLabel value="Nome  "/>
@@ -40,7 +40,8 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width: 8%" headerText="Excluir">
-                            <p:commandLink action="#{comarcaMB.deletar}" value="Excluir" immediate="true" update=":form :formtabela:tabela">
+                            <p:commandLink action="#{comarcaMB.deletar}" immediate="true" update=":form :formtabela:tabela">
+                                <h:graphicImage library="imagens" name="excluir16.png"/>
                                 <f:setPropertyActionListener target="#{comarcaMB.comarca}" value="#{com}"/>
                             </p:commandLink>
                         </p:column>

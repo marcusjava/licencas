@@ -147,16 +147,6 @@
             <version>1.0.8</version>
         </dependency>
         <dependency>
-            <groupId>apache-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>dot-luv</artifactId>
-            <version>1.0.8</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>3.0.5.RELEASE</version>
@@ -181,17 +171,12 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>5.6.0</version>
+            <version>5.5.1</version>
         </dependency>
         <dependency>
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
             <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-fonts</artifactId>
-            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -203,6 +188,18 @@
             <artifactId>poi</artifactId>
             <version>3.7</version>
         </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>2.1</version>
+            <type>jar</type>
+        </dependency>
+
 
 
 
@@ -354,18 +351,7 @@
         
         <!-- ##### DEPENDÊNCIAS DO PRIMEFACES ##### -->
         
-        <!-- ######## TEMAS DO PRIMEFACES ######### -->        
-        <dependency>              
-            <groupId>org.primefaces.themes</groupId>  
-            <artifactId>cupertino</artifactId>              
-            <version>${themes.version}</version> 
-        </dependency> 
-        
-        <dependency>  
-            <groupId>org.primefaces.themes</groupId>  
-            <artifactId>le-frog</artifactId>  
-            <version>${themes.version}</version> 
-        </dependency> 
+        <!-- ######## TEMAS DO PRIMEFACES ######### --> 
         
         <dependency>  
             <groupId>org.primefaces.themes</groupId>  
@@ -376,24 +362,6 @@
         <dependency>  
             <groupId>org.primefaces.themes</groupId>  
             <artifactId>pepper-grinder</artifactId>  
-            <version>${themes.version}</version> 
-        </dependency> 
-        
-        <dependency>  
-            <groupId>org.primefaces.themes</groupId>  
-            <artifactId>smoothness</artifactId>  
-            <version>${themes.version}</version> 
-        </dependency>        
-        
-        <dependency>  
-            <groupId>org.primefaces.themes</groupId>  
-            <artifactId>ui-lightness</artifactId>  
-            <version>${themes.version}</version> 
-        </dependency> 
-        
-        <dependency>  
-            <groupId>org.primefaces.themes</groupId>  
-            <artifactId>south-street</artifactId>  
             <version>${themes.version}</version> 
         </dependency>
 
@@ -447,7 +415,7 @@
             <artifactId>commons-collections</artifactId>
             <groupId>commons-collections</groupId>
             <type>jar</type>
-            <version>3.2.1</version>
+            <version>3.1</version>
         </dependency>
         
         <!-- ############### DOM4J ################# -->

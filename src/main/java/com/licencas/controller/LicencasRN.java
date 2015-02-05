@@ -40,14 +40,14 @@ public class LicencasRN {
                     {
                          licenca.setStatus("DESATIVADA");
                          licencaDAO().save(licenca);
-                         return "Licença salva com sucesso!";
+                         return "LicenÃ§a salva com sucesso!";
                     }catch(Exception e)
                     {
                         return "Ocorreu um erro: " + e.getMessage();
                     }
                 }else
                    {
-                       return "Esta licença já está cadastrada!";
+                       return "Esta licenÃ§a jÃ¡ estÃ¡ cadastrada!";
                    }
                 }
             else
@@ -66,7 +66,7 @@ public class LicencasRN {
        
      
    }
-     //VERIFICA SE A LICENÇA JA EXISTE
+     //VERIFICA SE A LICENÃ‡A JA EXISTE
    private boolean pesqcampounico(Licencas licenca)
    {
        String hql = "Select l from Licencas l where l.lic_desc = :desc";
@@ -78,7 +78,7 @@ public class LicencasRN {
        try
        {
             licencaDAO().remove(licenca);
-            return "Licença excluida com sucesso!";
+            return "LicenÃ§a excluida com sucesso!";
        }catch(HibernateException e)
        {
            return "Ocorreu um erro:" + e.getMessage();
@@ -103,11 +103,18 @@ public class LicencasRN {
    {
        if (selecionada.getStatus().equals("ATIVADA"))
         {
-            selecionada.setStatus("DESATIVADA");
-            selecionada.getLocal().setLicenca(null);
-            return addLicencas(selecionada);
+            try
+            {
+                selecionada.setStatus("DESATIVADA");
+                selecionada.getLocal().setLicenca(null);
+                licencaDAO().merge(selecionada);
+                return "Licenca liberada com sucesso";
+            }catch(Exception e)
+            {
+                return "Ocorreu um erro:" + e.getMessage();
+            }
         }
-       return "ERRO Licença já se encontra desativada!";
+       return "ERRO LicenÃ§a jÃ¡ se encontra desativada!";
    }
            
    

@@ -44,14 +44,16 @@ public class LocalRN {
        if (local.getId() == null || local.getId() == 0 )
        {
            if(!pesqcampounico(local))
+           {
                 try
                 {
                    LocalDAO().save(local);
                    return "Local salvo com sucesso!";
-                }catch(HibernateException e)
+                }catch(Exception e)
                 {
                     return "Ocorreu um erro:" + e.getMessage();
                 }
+           }
            else
            {
                return "Local já cadastrado!";
@@ -63,7 +65,7 @@ public class LocalRN {
            {
                 LocalDAO().merge(local);
                 return "Local atualizado com sucesso!";
-           }catch(HibernateException e)
+           }catch(Exception e)
            {
                return "Ocorreu um erro:" + e.getMessage();
            }

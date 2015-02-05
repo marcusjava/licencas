@@ -11,7 +11,7 @@
             <p:fieldset legend="Relatorios de licenças">
                 <h:panelGrid columns="4">
                     <h:form id="form_relatorios">
-                        <p:growl id="msg_relatorios"/>
+                        <p:messages id="msg_relatorios"/>
                         <h:commandLink>
                             <f:setPropertyActionListener target="#{licencasMB.tiporelatorio}" value="1"/>
                             <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
@@ -32,6 +32,9 @@
                             <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
                             <h:graphicImage library="imagens" name="ods.png" title="Imprimir ODS"/>
                         </h:commandLink>
+                        <p:commandButton action="#{licencasMB.imprimirRelatorio}"
+                              value="Relatório PDF" immediate="true">
+                        </p:commandButton>
                     </h:form>
                 </h:panelGrid>
             </p:fieldset>

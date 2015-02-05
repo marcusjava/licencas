@@ -9,7 +9,7 @@
         <ui:define name="centro">
             <p:fieldset legend="Cadastro locais" id="fieldlocal">
                 <h:form id="form_local">
-                    <p:growl id="msglocal" showDetail="true"/>
+                    <p:growl id="msglocal" showDetail="true" autoUpdate="true"/>
                     <br/>
                     <h:panelGrid columns="2" styleClass="panelGrid" cellpadding="10" id="panellocal">
                         <h:outputLabel value="Comarca.:"/>
@@ -26,12 +26,13 @@
                         <h:outputLabel value="Descrição.:"/>
                         <p:inputText value="#{localMB.local.loc_desc}" style="width:400px" required="true" requiredMessage="Campo obrigatorio" size="60" maxlength="60"/>
                         <h:outputLabel value="Nome computador.:"/>
-                        <p:inputText value="#{localMB.local.loc_nome_comp}" size="20" maxlength="20" onkeyup="this.value = this.value.toUpperCase()" />
+                        <p:inputText value="#{localMB.local.loc_nome_comp}" required="true" size="20" maxlength="20" onkeyup="this.value = this.value.toUpperCase()" />
                         <h:outputLabel value="Patrimonio computador.:"/>
-                        <p:inputText value="#{localMB.local.loc_pat_comp}"  size="10" maxlength="10"/>
+                        <p:inputText value="#{localMB.local.loc_pat_comp}" required="true" requiredMessage="Campo obrigatorio"  size="7" maxlength="7"/>
+                            
                         <h:outputText value=""/>
                         <p:panel>
-                            <p:commandButton action="#{localMB.Salvar}" value="Salvar" icon="ui-icon-disk" update=":form_local :tabela_local"/>
+                            <p:commandButton action="#{localMB.Salvar}" value="Salvar" icon="ui-icon-disk" update="form_local :tabela_local"/>
                             <p:commandButton type="reset" icon="ui-icon-cancel" value="Cancelar" update="@form"/>
                         </p:panel>
                     </h:panelGrid>
@@ -75,7 +76,8 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width: 5%" headerText="Excluir">
-                            <p:commandLink action="#{localMB.Deletar}" value="Excluir" immediate="true" update="tb_local :form_local">
+                            <p:commandLink action="#{localMB.Deletar}" immediate="true" update="tb_local :form_local">
+                                <h:graphicImage library="imagens" name="excluir16_1.png"/>
                                 <f:setPropertyActionListener target="#{localMB.localselec}" value="#{loc}"/>
                             </p:commandLink>
                         </p:column>

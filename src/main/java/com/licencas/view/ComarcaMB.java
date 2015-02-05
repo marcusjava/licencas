@@ -67,8 +67,7 @@ public class ComarcaMB implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         ComarcaRN comarcarn = new ComarcaRN();
         mensagem = comarcarn.Salvar(comarca);
-        FacesMessage msg = new FacesMessage(mensagem);
-        context.addMessage(null,msg );
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         novo();
     }
     public void deletar()

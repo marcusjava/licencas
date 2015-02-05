@@ -54,13 +54,9 @@
                         <p:column style="width: 8%" headerText="Editar">
                                 <p:rowEditor/>
                         </p:column>
-                        <p:column style="width: 8%" headerText="Excluir">
-                            <p:commandLink action="#{foroMB.deletar}" value="Excluir" immediate="true" update="tbforo :formforo:msg" >
-                                <f:setPropertyActionListener target="#{foroMB.foro}" value="#{f}"/>
-                            </p:commandLink>
-                        </p:column>
-                        <p:column style="width: 8%" headerText="Editar">
-                            <p:commandLink onclick="Editar.show()" value="Editar">
+                        <p:column style="width: 8%;" headerText="Excluir" >
+                            <p:commandLink action="#{foroMB.deletar}" immediate="true" update="tbforo :formforo:msg" >
+                                <h:graphicImage library="imagens" name="excluir16.png"/>
                                 <f:setPropertyActionListener target="#{foroMB.foro}" value="#{f}"/>
                             </p:commandLink>
                         </p:column>
