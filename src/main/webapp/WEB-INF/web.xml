@@ -12,7 +12,7 @@
     
     <context-param>  
         <param-name>primefaces.THEME</param-name>  
-        <param-value>redmond</param-value>  
+        <param-value>dark-hive</param-value>  
     </context-param> 
     
     <servlet>

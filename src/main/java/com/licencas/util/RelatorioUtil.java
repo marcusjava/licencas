@@ -47,11 +47,11 @@ public class RelatorioUtil {
 			Connection conexao = this.getConexao();
 			String caminhoRelatorio = context.getExternalContext().getRealPath("relatorios");
 			String caminhoArquivoJasper = caminhoRelatorio + File.separator + nomeRelatorioJasper + ".jasper";
-                        //File file = new File(caminhoArquivoJasper);
-                       // file = file.getAbsoluteFile();
+                        File file = new File(caminhoArquivoJasper);
+                        file = file.getAbsoluteFile();
                         String caminhoArquivoRelatorio = null;
-			JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(caminhoArquivoJasper);
-			JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, conexao);
+			JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(file);
+			JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, null, conexao);
 			JRExporter tipoArquivoExportado = null;
 			String extensaoArquivoExportado = "";
 			File arquivoGerado = null;
@@ -89,9 +89,9 @@ public class RelatorioUtil {
 			InputStream conteudoRelatorio = new FileInputStream(arquivoGerado);
 			arquivoRetorno = new DefaultStreamedContent(conteudoRelatorio, "application/" + extensaoArquivoExportado, nomeRelatorioSaida + "." + extensaoArquivoExportado);
 		} catch (JRException e) {
-			throw new UtilException("NÃ£o foi possÃ­vel gerar o relatorio.",e);
+			throw new UtilException("Nao foi possivel gerar o relatorio .",e);
 		} catch (FileNotFoundException e) {
-			throw new UtilException("Arquivo do relatÃ³rio nÃ£o encontrado.", e);
+			throw new UtilException("Arquivo do relatorio nao encontrado.", e);
 		}
 		return arquivoRetorno;
 	}
@@ -104,7 +104,7 @@ public class RelatorioUtil {
 			javax.sql.DataSource ds = (javax.sql.DataSource) envContext.lookup("jdbc/LicencasDB");
 			conexao = (java.sql.Connection) ds.getConnection();
 		} catch (NamingException e) {
-			throw new UtilException("Nï¿½o foi possÃ­vel encontrar o nome da conexï¿½o do banco.", e);
+			throw new UtilException("Nao foi possivel encontrar o nome da conexao do banco.", e);
 		} catch (SQLException e) {
 			throw new UtilException("Ocorreu um erro de SQL.", e);
 		}

@@ -119,14 +119,14 @@
             <url>http://maven.springframework.org/milestone</url>
         </repository>
        
-        <!-- REPOSITÓRIO DA AOP ALLIANCE -->
+        <!-- REPOSITÃ“RIO DA AOP ALLIANCE -->
         <repository>
             <id>spring-ext</id>
             <name>Spring External Dependencies Repository</name>
             <url>https://svn.sourceforge.net/svnroot/springframework/repos/repo-ext/</url>
         </repository>       
         
-        <!-- REPOSITÓRIO DO JASPER REPORTS -->        
+        <!-- REPOSITÃ“RIO DO JASPER REPORTS -->        
         <repository>
             <id>jasperreports</id>
             <url>http://repo1.maven.org/maven2/</url>
@@ -153,12 +153,17 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>com.google.code.maven-play-plugin.org.apache.commons</groupId>
+            <artifactId>commons-javaflow</artifactId>
+            <version>1590792</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- || DEPENDÊNCIAS DO JAVA SERVER FACES || -->                        
+        <!-- || DEPENDÃŠNCIAS DO JAVA SERVER FACES || -->                        
         <!-- ############## JSF-API ################ -->
         <dependency>
             <groupId>com.sun.faces</groupId>
@@ -171,17 +176,20 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>5.5.1</version>
+            <version>5.6.0</version>
         </dependency>
+        
         <dependency>
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
             <version>2.1.7</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>2.0.1</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -189,23 +197,50 @@
             <version>3.7</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.7</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>1.8.0</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-digester</groupId>
             <artifactId>commons-digester</artifactId>
             <version>2.1</version>
-            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
-
-
-
-
-
-
-
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-fonts</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+        <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+                    
 
         <!-- ############## JSF-IMPL ############### -->
         <dependency>
@@ -237,7 +272,7 @@
         
          <!-- Spring SEcurity-->
          
-         <!--  |||| DEPENDÊNCIAS DO SPRING-SECURITY || 
+         <!--  |||| DEPENDÃŠNCIAS DO SPRING-SECURITY || 
   --> 
 <!--  ### FACELETS-TAGLIB-JSF2.0-SPRING-3 ### 
   --> 
@@ -290,7 +325,7 @@
         <artifactId>spring-security-web</artifactId> 
         <version>3.0.5.RELEASE</version> 
     </dependency>
-<!--  ||| DEPENDÊNCIAS DO SPRING FRAMEWORK |||
+<!--  ||| DEPENDÃŠNCIAS DO SPRING FRAMEWORK |||
   --> 
  <!--  ############# SPRING-ASM ############## 
   --> 
@@ -349,7 +384,7 @@
 
 
         
-        <!-- ##### DEPENDÊNCIAS DO PRIMEFACES ##### -->
+        <!-- ##### DEPENDÃŠNCIAS DO PRIMEFACES ##### -->
         
         <!-- ######## TEMAS DO PRIMEFACES ######### --> 
         
@@ -378,7 +413,7 @@
             <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- |||||| DEPENDÊNCIAS DO HIBERNATE |||||| -->
+        <!-- |||||| DEPENDÃŠNCIAS DO HIBERNATE |||||| -->
 
         <!-- ########### HIBERNATE-C3P0 ############ -->
         <dependency>
@@ -494,14 +529,14 @@
             <version>2.4.3</version>
         </dependency>            
 
-        <!-- || DEPENDÊNCIAS DO JAVAX-PERSISTENCE || -->
+        <!-- || DEPENDÃŠNCIAS DO JAVAX-PERSISTENCE || -->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>1.0.2</version>
         </dependency>
         
-        <!-- |||| DEPENDÊNCIAS DO MYSQL DRIVER  |||| -->        
+        <!-- |||| DEPENDÃŠNCIAS DO MYSQL DRIVER  |||| -->        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -522,7 +557,7 @@
 
         <!-- ############ AOP-ALLIANCE ############ --> 
         
-        <!-- ||||||| DEPENDÊNCIAS DO J-UNIT |||||||| -->        
+        <!-- ||||||| DEPENDÃŠNCIAS DO J-UNIT |||||||| -->        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

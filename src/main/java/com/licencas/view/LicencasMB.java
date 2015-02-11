@@ -6,6 +6,8 @@ import com.licencas.controller.UsuarioRN;
 import com.licencas.model.entities.Licencas;
 import com.licencas.model.entities.Local;
 import com.licencas.model.entities.Usuario;
+import com.licencas.util.FacesContextUtil;
+import com.licencas.util.GeraRelatorio;
 import com.licencas.util.RelatorioUtil;
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,7 +19,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.StreamedContent;
@@ -44,6 +48,7 @@ public class LicencasMB implements Serializable{
     //Informaçoes para o relatorio jasper
     private StreamedContent arquivoretorno;
     private int tiporelatorio;
+    private HttpServletResponse response;
 
     
     @PostConstruct
@@ -112,11 +117,12 @@ public class LicencasMB implements Serializable{
         }
         return this.arquivoretorno;
     }
-    public void imprimirRelatorio() throws Exception{  
-
-        
   
-}   
+    
+    
+    
+    
+
     public void setArquivoretorno(StreamedContent arquivoretorno) {
         this.arquivoretorno = arquivoretorno;
     }
