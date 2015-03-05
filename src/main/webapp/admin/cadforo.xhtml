@@ -16,14 +16,14 @@
                     <h:panelGrid columns="2" styleClass="panelGrid" cellpadding="10">
                         <p:outputLabel value="Comarca.:"/>
                         <p:selectOneMenu  style="width: 300px" id="comarca" value="#{foroMB.foro.comarca.id}">
-                            <f:selectItem itemLabel="-Selecione uma Comarca" itemValue=""/>
+                            <f:selectItem itemLabel="Selecione uma Comarca" itemValue=""/>
                             <f:selectItems var="com" value="#{comarcaMB.lista}" itemLabel="#{com.com_desc}" itemValue="#{com.id}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Nome.:" id="Descrição"/>
                         <p:inputText value="#{foroMB.foro.for_desc}" required="true" requiredMessage="Campo obrigatorio" size="45"/>
                         <p:outputLabel value=""/>
                         <p:panel>
-                            <p:commandButton action="#{foroMB.Salvar}" icon="ui-icon-disk" update="formforo :tabelaforo" value="Salvar"/>
+                            <p:commandButton action="#{foroMB.Salvar}" icon="ui-icon-disk" update=":tabelaforo formforo" value="Salvar"/>
                             <p:commandButton action="#{foroMB.novo}" icon="ui-icon-cancel" value="Cancelar" update="@form"/>
                         </p:panel>
                     </h:panelGrid>

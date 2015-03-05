@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            <p:fieldset legend="Relatorios de Bens">
+                <h:panelGrid columns="4">
+                    <h:form id="form_relatorios">
+                        <p:messages id="msg_relatorios"/>
+                        <p:selectOneMenu value="#{bemMB.nomerelatorio}" style="width: 200px">
+                            <f:selectItem itemValue="" itemLabel="Selecione"/>
+                            <f:selectItem itemValue="bens_local" itemLabel="Bens por Local"/>
+                            <f:selectItem itemValue="licencas_local" itemLabel="Licencas por local"/>
+                        </p:selectOneMenu>
+                        
+                        <h:commandLink>
+                            <f:setPropertyActionListener target="#{bemMB.tiporelatorio}" value="1"/>
+                            <p:fileDownload value="#{bemMB.arquivoretorno}"/>
+                            <h:graphicImage library="imagens" name="pdf.png" title="Imprimir PDF"/>
+                        </h:commandLink>
+                        <h:commandLink>
+                            <f:setPropertyActionListener target="#{bemMB.tiporelatorio}" value="2"/>
+                            <p:fileDownload value="#{bemMB.arquivoretorno}"/>
+                            <h:graphicImage library="imagens" name="excel.png" title="Imprimir XLS"/>
+                        </h:commandLink>
+                    </h:form>
+                </h:panelGrid>
+            </p:fieldset>
+        </ui:define>
+    </ui:composition>

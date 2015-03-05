@@ -32,19 +32,10 @@
                          rowsPerPageTemplate="5,10,15">
                         <p:ajax event="rowEdit" listener="#{licencasMB.onRowEdit}" update=":form_tabela:tabela :form_tabela:msg1"/>
                         <p:ajax event="rowEditCancel" listener="#{licencasMB.onRowCancel}" update=":form_tabela:tabela :form_tabela:msg1"/>
-                        <p:column headerText="ID" width="50" >
-                            <h:outputText value="#{lic.id}"/>
-                        </p:column>
                         <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 400px">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{lic.lic_desc}"/></f:facet>
                                 <f:facet name="input"><p:inputText id="txtdesc" value="#{lic.lic_desc}" style="width:100% " label="Descricao"/></f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column filterBy="#{lic.local.loc_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 400px">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lic.local.loc_desc}"/></f:facet>
-                                <f:facet name="input"><p:inputText  value="#{lic.local.loc_desc}" style="width:100% " label="Descricao"/></f:facet>
                             </p:cellEditor>
                         </p:column>
                         <p:column headerText="Status" width="110">

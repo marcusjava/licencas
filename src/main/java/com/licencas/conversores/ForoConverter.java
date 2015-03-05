@@ -6,17 +6,11 @@
 package com.licencas.conversores;
 
 
-import com.licencas.model.dao.HibernateDAO;
-import com.licencas.model.dao.InterfaceDAO;
 import com.licencas.model.entities.Foro;
-import com.licencas.util.FacesContextUtil;
-import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
-import java.lang.annotation.Annotation;
-import java.util.List;
+import java.util.Map;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 /**
@@ -25,46 +19,40 @@ import javax.faces.convert.FacesConverter;
  */
 @FacesConverter(value = "foroconverter")
 public class ForoConverter implements Converter{
-    private InterfaceDAO<Foro> foroDAO()
-        {
-            InterfaceDAO<Foro> foroDAO = new HibernateDAO<Foro>(Foro.class,FacesContextUtil.getRequestSession());
-            return foroDAO;
+     @Override
+    public Object getAsObject(FacesContext ctx, UIComponent component,
+            String value) {
+        if (value != null) {
+            return this.getAttributesFrom(component).get(value);
         }
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        
-        if (value != null && value.isEmpty()) 
-         {
-            
-            try 
-             {
-               
-                return (Foro) component.getAttributes().get(value);
-                 
-             }// Fim do try
-            catch (Exception e) 
-             {
-                throw new ConverterException("Erro ao realizar a conversão " + value + "." + e.getMessage());
-             }// Fim do catch
-         }
-         return null;
+        return null;
     }
-    
-
+ 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value instanceof Foro)
-         {
-            //Aqui voce vai passar o identificador da sua classe
-            Foro foro = (Foro) value;
-            if (foro instanceof Foro && foro.getId() != null) {
-                component.getAttributes().put( foro.getId().toString(), foro);
-                return foro.getId().toString();
+    public String getAsString(FacesContext ctx, UIComponent component,
+            Object value) {
+ 
+        if (value != null && ! "".equals(value)) {
+            Foro entity = (Foro) value;
+ 
+            if (entity.getId() != null) {
+                this.addAttribute(component, entity);
+ 
+                if (entity.getId() != null) {
+                    return String.valueOf(entity.getId());
+                }
+                return (String) value;
             }
-        
         }
         return "";
-    
+    }
+ 
+    private void addAttribute(UIComponent component, Foro foro) {
+        this.getAttributesFrom(component).put(foro.getId().toString(), foro);
+    }
+ 
+    private Map<String, Object> getAttributesFrom(UIComponent component) {
+        return component.getAttributes();
     }
 
    

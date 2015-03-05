@@ -8,6 +8,7 @@ package com.licencas.controller;
 import com.licencas.model.dao.HibernateDAO;
 import com.licencas.model.dao.InterfaceDAO;
 import com.licencas.model.entities.Licencas;
+import com.licencas.model.entities.Local;
 import com.licencas.util.FacesContextUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -38,16 +39,17 @@ public class LicencasRN {
                 {
                     try
                     {
+                         licenca.setLocal(null);
                          licenca.setStatus("DESATIVADA");
                          licencaDAO().save(licenca);
-                         return "LicenÃ§a salva com sucesso!";
+                         return "Licenca salva com sucesso!";
                     }catch(Exception e)
                     {
                         return "Ocorreu um erro: " + e.getMessage();
                     }
                 }else
                    {
-                       return "Esta licenÃ§a jÃ¡ estÃ¡ cadastrada!";
+                       return "Esta licenca já está cadastrada!";
                    }
                 }
             else
@@ -73,12 +75,29 @@ public class LicencasRN {
        Licencas campounico = licencaDAO().getCampoUnico(hql, licenca.getLic_desc());
        return campounico != null;
    }
+   
+   public String AdicionaLocal(Licencas licenca, Local local)
+   {
+     try
+     {
+         licenca.setLocal(local);
+         licenca.setStatus("ATIVADA");
+         licencaDAO().merge(licenca);
+         return "Licenca atualizada com sucesso";
+         
+     }catch(Exception e)
+     {
+         return "Ocorreu um erro" + e.getMessage();
+     }
+          
+   }
+   
    public String deleteLicencas(Licencas licenca)
    {
        try
        {
             licencaDAO().remove(licenca);
-            return "LicenÃ§a excluida com sucesso!";
+            return "Licença excluida com sucesso!";
        }catch(HibernateException e)
        {
            return "Ocorreu um erro:" + e.getMessage();
@@ -106,7 +125,7 @@ public class LicencasRN {
             try
             {
                 selecionada.setStatus("DESATIVADA");
-                selecionada.getLocal().setLicenca(null);
+                selecionada.setLocal(null);
                 licencaDAO().merge(selecionada);
                 return "Licenca liberada com sucesso";
             }catch(Exception e)
@@ -114,7 +133,7 @@ public class LicencasRN {
                 return "Ocorreu um erro:" + e.getMessage();
             }
         }
-       return "ERRO LicenÃ§a jÃ¡ se encontra desativada!";
+       return "ERRO Licenca ja se encontra desativada!";
    }
            
    

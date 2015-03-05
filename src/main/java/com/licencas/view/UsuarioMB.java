@@ -147,7 +147,8 @@ public class UsuarioMB implements Serializable{
      public String Excluir()
      {
          UsuarioRN usuariorn = new UsuarioRN();
-         usuariorn.Excluir(usuario);
+         mensagem = usuariorn.Excluir(usuario);
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));         
          novo();
          return null;
      }

@@ -13,26 +13,37 @@
             <p:layoutUnit position="west" style="width: 200" header="Menu" resizable="true"  collapsible="true">
                     <h:form>
                         <br/>
-                        Seja bem vindo #{request.remoteUser}
+                        Seja bem vindo #{request.remoteUser} 
                         <br/>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                            <h:outputText value="Sair" style="alignment-adjust: middle;position: absolute;bottom: 10px;float: left;color: #8B0000;border-radius: 5px;padding: 5px 20px;text-decoration: none;width: 75%;text-align: center;"/>
+                        </h:outputLink>
                         <br/>
-                        <p:menu>
+                        <p:panelMenu style="width:200px">
                             <p:submenu label="Cadastros">
                                 <p:menuitem url="/admin/cadcomarca.xhtml" value="Comarca"/>
                                 <p:menuitem url="/admin/cadforo.xhtml" value="Foro"/>
                                 <p:menuitem url="/admin/cadlocal.xhtml" value="Local"/>
                                 <p:menuitem url="/admin/cadlicencas.xhtml" value="Licenças"/>
                                 <p:menuitem url="/admin/cadusuario.xhtml" value="Usuarios"/>
+                                <p:menuitem url="/admin/cad_equipamentos.xhtml" value="Equipamentos"/>
+                            </p:submenu>
+                            <p:submenu label="Bens">
+                                <p:menuitem url="/admin/cad_bens.xhtml" value="Cadastrar Bem"/>
+                                <p:menuitem url="/admin/transf_bens.xhtml" value="Transferir Bem"/>
+                                <p:menuitem url="/restrict/consulta_bem.xhtml"  value="Consultar Bem"/>
+                                <p:menuitem url="/restrict/consulta_bem_local.xhtml" value="Consulta bem por local"/>
                             </p:submenu>
                             <p:submenu label="Licenças">
                                 <p:menuitem url="/restrict/loclicenca.xhtml"  value="Licença ao local"/>
                                 <p:menuitem url="/restrict/liblicenca.xhtml" value="Liberar licença"/>
-                                <p:menuitem url="/restrict/liblicenca.xhtml" value="Licenças"/>
+                                <p:menuitem url="/restrict/licencas.xhtml" value="Licenças"/>
                             </p:submenu>
                             <p:submenu label="Relatorios">
-                                <p:menuitem url="/restrict/relatorios.xhtml" value="Licenças"/>
+                                <p:menuitem url="/restrict/relatorios_licencas.xhtml" value="Licenças"/>
+                                <p:menuitem url="/restrict/relatorios_bens.xhtml" value="Bens"/>
                             </p:submenu>
-                        </p:menu>
+                        </p:panelMenu>
                         <br/>
                         <br/>
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">

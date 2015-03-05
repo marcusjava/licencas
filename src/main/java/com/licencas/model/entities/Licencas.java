@@ -29,7 +29,8 @@ public class Licencas implements Serializable{
     @Column(name = "lic_status",nullable = false)
     private String status;
     
-    @OneToOne(mappedBy = "licenca",cascade = CascadeType.MERGE)
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "loc_id" , referencedColumnName = "loc_id")
     private Local local;
 
     public Integer getId() {

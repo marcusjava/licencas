@@ -48,6 +48,7 @@ public class LicencasMB implements Serializable{
     //Informaçoes para o relatorio jasper
     private StreamedContent arquivoretorno;
     private int tiporelatorio;
+    private String nomerelatorio;
     private HttpServletResponse response;
 
     
@@ -101,14 +102,15 @@ public class LicencasMB implements Serializable{
         ExternalContext external = context.getExternalContext();
         String login = external.getRemoteUser();
         Usuario usuario = usuariorn.buscaporlogin(login);
-        String nomeRelatorioJasper ="licencas";
+        String nomeRelatorioJasper = nomerelatorio;
         String nomeRelatorioSaida = usuario.getLogin()+"_licencas";
         RelatorioUtil relatorio = new RelatorioUtil();
         HashMap parametros = new HashMap();
         parametros.put("codigousuario", usuario.getCodigo());
         try
         {
-            this.arquivoretorno = relatorio.geraRelatorio(parametros, nomeRelatorioJasper, nomeRelatorioSaida, tiporelatorio,licencas);
+             this.arquivoretorno = relatorio.geraRelatorio(parametros, nomeRelatorioJasper, nomeRelatorioSaida, tiporelatorio,licencas);
+           
         }catch(Exception e)
         {
             mensagem = e.getMessage();
@@ -117,6 +119,16 @@ public class LicencasMB implements Serializable{
         }
         return this.arquivoretorno;
     }
+
+    public String getNomerelatorio() {
+        return nomerelatorio;
+    }
+
+    public void setNomerelatorio(String nomerelatorio) {
+        this.nomerelatorio = nomerelatorio;
+    }
+
+   
   
     
     

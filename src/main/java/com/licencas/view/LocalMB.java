@@ -13,11 +13,15 @@ import com.licencas.model.entities.Foro;
 import com.licencas.model.entities.Local;
 import com.licencas.model.entities.Licencas;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
@@ -46,59 +50,81 @@ public class LocalMB implements Serializable{
     private List<Licencas> desativadas;
     private String mensagem;
     
+    public String novo()
+    {
+        LicencasRN licencarn = new LicencasRN();
+        local = new Local();
+        licenca = new Licencas();
+        comarca = new Comarca();
+        local.setForo(new Foro());
+        desativadas = null;
+        desativadas = licencarn.listaDesativadas();
+        return "loclicenca";
+          
+    }
     
-    
-   
+   public void refresh() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Application application = context.getApplication();
+        ViewHandler viewHandler = application.getViewHandler();
+        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
+        context.setViewRoot(viewRoot);
+        context.renderResponse();
+
+        System.out.println("ATUALIZANDO");
+    }
      @PostConstruct
      public void init()
      {
+        LicencasRN licencarn = new LicencasRN();
         local = new Local();
+        licenca = new Licencas();
+        comarca = new Comarca();
         local.setForo(new Foro());
-        local.setLicenca(new Licencas());
+        
+        
      }
 
-    public void novo()
-    {
-       local = new Local();
-       licenca = new Licencas();
-       comarca = new Comarca();
-       foro = new Foro();
-       local.setForo(new Foro());
-       //local.setLicenca(new Licencas());
-    }
+    //AutoComplete
+     public List<Local> complete(String name)
+     {
+         List<Local> resultado = new ArrayList<Local>();
+         if(locais == null)
+         {
+             LocalRN localrn = new LocalRN();
+             locais = localrn.todas();
+         }
+         for(Local localselecionado : locais)
+         {
+             if(localselecionado.getLoc_desc().toLowerCase().contains(name.toLowerCase()))
+             {
+                 resultado.add(localselecionado);
+             }
+             
+         }
+         return resultado;
+     }
     public String Salvar()
     {
         LocalRN localrn = new LocalRN();
-        local.setLicenca(null);
+        local.setLicencas(null);
         mensagem = localrn.addLocal(local);
         locais = null;
         novo();
+        refresh();
         return null;
        
     }
     
+    //Atribui a licenca ao local
     public String SalvarLicenca()
     {
         LocalRN localrn = new LocalRN();
-        if (local.getLicenca() == null)
-        {
-            licenca.setStatus("ATIVADA");
-            local.setLicenca(licenca);
-            mensagem = localrn.addLocal(local);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
-        }
-        else
-        {
-            if("ATIVADA".equals(licenca.getStatus()))
-            {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "A Licença já está ativada",""));
-            }
-            if(local.getLicenca() != null)
-            {
-              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "O local já possui licença favor liberar",""));  
-            }
-        }
+        LicencasRN licencarn = new LicencasRN();
+        mensagem = licencarn.AdicionaLocal(licenca, local);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         novo();
+        refresh();
         return null;
     }
     

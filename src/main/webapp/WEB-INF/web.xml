@@ -12,7 +12,7 @@
     
     <context-param>  
         <param-name>primefaces.THEME</param-name>  
-        <param-value>dark-hive</param-value>  
+        <param-value>dot-luv</param-value>  
     </context-param> 
     
     <servlet>

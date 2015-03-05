@@ -35,5 +35,9 @@ public interface InterfaceDAO<T> {
     //pesquisa comarca pelo campo unico descrição
     Comarca buscacomarca(String desc);
     T getCampoUnico(String hql,String desc);
+    //pesquisa do bem pelo patrimonio
+    List<T> getLisByPatrimonio(String hql,String patrimonio);
+    //pesquisa de bens pelo local
+    List<T> getListByLocal(String hql,Local local);
     
 }

@@ -11,10 +11,7 @@ import com.licencas.model.entities.Foro;
 import com.licencas.model.entities.Local;
 import com.licencas.util.FacesContextUtil;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
-import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -53,6 +50,7 @@ public class LocalRN {
                 {
                     return "Ocorreu um erro:" + e.getMessage();
                 }
+                
            }
            else
            {

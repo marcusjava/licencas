@@ -19,5 +19,7 @@
         <mapping class="com.licencas.model.entities.Licencas"/>
         <mapping class="com.licencas.model.entities.Local"/>
         <mapping class="com.licencas.model.entities.Usuario"/>
+        <mapping class="com.licencas.model.entities.Equipamento"/>
+        <mapping class="com.licencas.model.entities.Bem"/>
   </session-factory>
 </hibernate-configuration>

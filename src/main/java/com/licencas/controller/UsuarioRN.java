@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.HibernateException;
-import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -45,14 +44,27 @@ public class UsuarioRN {
         }
         else
         {
-            usuarioDAO().update(usuario);
-            return "Usuario atualizado com sucesso";
+            try
+            {
+                usuarioDAO().update(usuario);
+                return "Usuario atualizado com sucesso";
+            }catch(Exception e)
+            {
+                return "Ocorreu erro ao atualizar" + e.getMessage();
+            }
         }
     }
     
-    public void Excluir(Usuario usuario)
+    public String Excluir(Usuario usuario)
     {
+        try
+        {
         usuarioDAO().remove(usuario);
+        return "Usuario excluido com sucesso!";
+        }catch(Exception e )
+        {
+            return "Ocorreu erro ao excluir" + e.getMessage();
+        }
     }
     
     public List<Usuario> todos()

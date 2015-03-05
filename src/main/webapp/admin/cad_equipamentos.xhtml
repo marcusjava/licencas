@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro de Equipamentos" id="equip">
+                <br/>
+                <h:form id="form_equipamento" prependId="false">
+                    <p:growl showDetail="true" id="msg_equi"/>
+                    <h:outputLabel value="Descrição.:"/>
+                    <p:inputText value="#{equipamentoMB.equipamento.descricao}" required="true" requiredMessage="Preencha a descrição!" style="width: 400px"/>
+                    <br/>
+                    <br/>
+                    <p:panel>
+                        <p:commandButton action="#{equipamentoMB.Salvar}" icon="ui-icon-disk" update=":form_equipamento :tabela_equip" value="Salvar"/>
+                        <p:commandButton type="reset" icon="ui-icon-cancel" value="Cancelar" update=":form_equipamento"/>
+                    </p:panel>
+                </h:form>
+                <h:form id="tabela_equip">
+                    <p:dataTable id="tabela" var="equip" value="#{equipamentoMB.equipamentos}" emptyMessage="Nenhum registro encontrado" filteredValue="#{equipamentoMB.filtro_equipamentos}" editable="true" paginator="true" rows="10" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        <p:ajax event="rowEdit" listener="#{equipamentoMB.onRowEdit}" update="tabela"/>
+                        <p:ajax event="rowEditCancel" listener="#{equipamentoMB.onRowCancel}" update="tabela"/>
+                        <p:column headerText="ID" width="50" >
+                            <h:outputText value="#{equip.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{equip.descricao}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 400px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{equip.descricao}"/></f:facet>
+                                <f:facet name="input"><p:inputText id="txtdesc" value="#{equip.descricao}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Editar">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width: 8%" headerText="Excluir">
+                            <p:commandLink action="#{equipamentoMB.Deletar}" value="Excluir" immediate="true" update=":tabela_equip">
+                                <f:setPropertyActionListener target="#{equipamentoMB.equipamento}" value="#{equip}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+    </ui:composition>

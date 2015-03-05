@@ -11,9 +11,13 @@ import com.licencas.model.entities.Comarca;
 import com.licencas.model.entities.Foro;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
@@ -35,19 +39,45 @@ public class ForoMB implements Serializable{
     private Comarca comarcaselecionada;
     private ForoRN fororn;
     private String mensagem;
+    private Comarca comarca;
     
     
-    public ForoMB()
+    @PostConstruct
+    public void novo()
     {
-       foro = new Foro();
-       fororn = new ForoRN();
+        fororn = new ForoRN();
+        foros = fororn.todas();
+        filtro_lista = fororn.todas();
+        foro = new Foro();
+        //foro.setComarca(new Comarca());
+        
         
     }
     
-    public void novo()
+    public String Salvar()
     {
-        foro = new Foro();
-        foros = null;
+        mensagem = fororn.addForo(foro);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem,""));
+        foros.clear();
+        filtro_lista.clear();
+        novo();
+        this.refresh();
+        return null;
+        
+    }
+    
+    public void deletar()
+    {
+       mensagem = fororn.deleteForo(foro);
+       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem,""));
+       novo();
+    }
+    
+    public void Editar()
+    {
+        mensagem = fororn.addForo(foro);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem,""));
+        novo();
     }
     
     public Foro getForo() {
@@ -67,7 +97,6 @@ public class ForoMB implements Serializable{
     }
     
     
-
     public List<Foro> getForos() {
         foros = fororn.todas();
         return foros;
@@ -78,46 +107,32 @@ public class ForoMB implements Serializable{
     }
 
     public List<Foro> getFiltro_lista() {
+        filtro_lista = fororn.todas();
         return filtro_lista;
     }
+
+    public Comarca getComarca() {
+        return comarca;
+    }
+
+    public void setComarca(Comarca comarca) {
+        this.comarca = comarca;
+    }
+    
+    
 
     public void setFiltro_lista(List<Foro> filtro_lista) {
         this.filtro_lista = filtro_lista;
     }
-    
-    
-    public void Salvar()
-    {
-        mensagem = fororn.addForo(foro);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem,""));
-        foros = null;
-        novo();
-        
-        
-    }
-    public void deletar()
-    {
-      
-       mensagem = fororn.deleteForo(foro);
-       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem,""));
-       novo();
-    }
-    /*@PostConstruct
-    public void novo()
-    {
-        ForoRN  fororn = new ForoRN();
-        foros = fororn.todas();
-        filtro_lista = fororn.todas();
-        foro = new Foro();
-        foro.setComarca(new Comarca());
-        
-        
-    }*/
-    public void Editar()
-    {
-        mensagem = fororn.addForo(foro);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem,""));
-        novo();
+    public void refresh() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Application application = context.getApplication();
+        ViewHandler viewHandler = application.getViewHandler();
+        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
+        context.setViewRoot(viewRoot);
+        context.renderResponse();
+
+        System.out.println("ATUALIZANDO");
     }
     public void onRowEdit(RowEditEvent event) {
         Foro forotemp = (Foro) event.getObject();

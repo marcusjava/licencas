@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="centro">
+        <p:fieldset legend="Consulta de Bens por local" id="field_bem">
+            <br/>
+            <br/>
+             <h:form id="form_cons_bem_local">
+                <p:growl id="msg_trans" showDetail="true"/>
+                    <h:outputText value="Local.: "/>
+                    <p:autoComplete dropdown="true" value="#{bemMB.local}" completeMethod="#{localMB.complete}"
+                                    var="loc" itemLabel="#{loc.loc_desc}" itemValue="#{loc}" forceSelection="true" converter="converterlocal" converterMessage="Erro de conversão"/>
+                    <p:commandButton action="#{bemMB.BuscarLocal}" icon="ui-icon-search" update=":tb_cons_bem_local" />
+                    <br/>
+                    <br/>
+                    <p:commandButton icon="ui-icon-reset" value="Limpar" action="#{bemMB.refresh}" update="@all" />
+            </h:form>
+            <h:form id="tb_cons_bem_local">
+                <p:dataTable id="tabela" var="bem" value="#{bemMB.pesq_local}" emptyMessage="Nenhum registro encontrado" editable="true" paginator="true" rows="15" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                         <p:column  headerText="Local"  filterMatchMode="contains" width="200">
+                             <h:outputText value="#{bem.patrimonio}"/>
+                        </p:column>
+                        <p:column  headerText="Equipamento"  width="200">
+                            <h:outputText value="#{bem.equipamento.descricao}"/>
+                        </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+</ui:composition>

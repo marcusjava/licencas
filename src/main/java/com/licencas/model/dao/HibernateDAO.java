@@ -1,5 +1,6 @@
 package com.licencas.model.dao;
 
+import com.licencas.model.entities.Bem;
 import com.licencas.model.entities.Comarca;
 import com.licencas.model.entities.Foro;
 import com.licencas.model.entities.Licencas;
@@ -180,6 +181,25 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
         Query consulta = this.session.createQuery(hql);
         consulta.setString("desc", desc);
         return (T) consulta.uniqueResult();
+    }
+
+    @Override
+    public List<T> getLisByPatrimonio(String hql,String patrimonio) {
+        
+        Query q = session.createQuery(hql);
+        q.setParameter("patrimonio", patrimonio);
+        return q.list();
+    
+    }
+
+    @Override
+    public List<T> getListByLocal(String hql, Local local) {
+        Criteria crit = session.createCriteria(Bem.class);
+        crit.add(Restrictions.eq("local",local));
+        //Query q = session.createQuery(hql);
+        //q.setParameter("local", local);
+        return crit.list();
+    
     }
 }
 

@@ -5,7 +5,7 @@
  */
 package com.licencas.conversores;
 
-import com.licencas.model.entities.Local;
+import com.licencas.model.entities.Equipamento;
 import java.util.Map;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -16,9 +16,10 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Marcus
  */
-@FacesConverter(value = "converterlocal")
-public class ConverterLocal implements Converter{
-
+@FacesConverter(value = "equipamentoconverter")
+public class EquipamentoConverter implements Converter{
+    
+    
     @Override
     public Object getAsObject(FacesContext ctx, UIComponent component,
             String value) {
@@ -33,7 +34,7 @@ public class ConverterLocal implements Converter{
             Object value) {
  
         if (value != null && ! "".equals(value)) {
-            Local entity = (Local) value;
+            Equipamento entity = (Equipamento) value;
  
             if (entity.getId() != null) {
                 this.addAttribute(component, entity);
@@ -47,12 +48,12 @@ public class ConverterLocal implements Converter{
         return "";
     }
  
-    private void addAttribute(UIComponent component, Local loc) {
+    private void addAttribute(UIComponent component, Equipamento loc) {
         this.getAttributesFrom(component).put(loc.getId().toString(), loc);
     }
  
     private Map<String, Object> getAttributesFrom(UIComponent component) {
         return component.getAttributes();
     }
-   
+    
 }

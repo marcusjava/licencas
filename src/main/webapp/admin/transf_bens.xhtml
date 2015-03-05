@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="centro">
+        <p:fieldset legend="Transferir Bens" id="field_bem">
+            <br/>
+            <br/>
+            <h:form id="form_trans">
+                <p:growl id="msg_trans" showDetail="true"/>
+                
+                    <h:outputText value="Patrimonio.: "/>
+                    <p:inputText required="true" requiredMessage="Campo obrigatorio" value="#{bemMB.patrimonio}" style="width:100px"/>
+                    <p:commandButton  action="#{bemMB.BuscarPatrimonio}" icon="ui-icon-search" update=":form_trans"/>
+                    <br/>
+                    <br/>
+                    Local atual.:  <h:outputText value="#{bemMB.bem.local.loc_desc}"/>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Novo Local.: "/>
+                    <p:autoComplete style="width:300px" dropdown="true" value="#{bemMB.novo_local}" completeMethod="#{localMB.complete}" var="local" 
+                                    itemLabel="#{local.loc_desc}" itemValue="#{local}" forceSelection="true" converter="converterlocal" />
+                    <br/>
+                    <br/>
+                    <p:commandButton rendered="#{bemMB.bem.id > 0}" value="Transferir" action="#{bemMB.Transferir}" icon="ui-icon-disk" update="form_trans"/>
+                
+                
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+</ui:composition>

@@ -51,7 +51,7 @@ public class RelatorioUtil {
                         file = file.getAbsoluteFile();
                         String caminhoArquivoRelatorio = null;
 			JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(file);
-			JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, null, conexao);
+			JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, conexao);
 			JRExporter tipoArquivoExportado = null;
 			String extensaoArquivoExportado = "";
 			File arquivoGerado = null;

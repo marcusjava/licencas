@@ -12,6 +12,12 @@
                 <h:panelGrid columns="4">
                     <h:form id="form_relatorios">
                         <p:messages id="msg_relatorios"/>
+                        <p:selectOneMenu value="#{licencasMB.nomerelatorio}" style="width: 200px">
+                            <f:selectItem itemValue="" itemLabel="Selecione"/>
+                            <f:selectItem itemValue="licencas" itemLabel="Todas as licencas"/>
+                            <f:selectItem itemValue="licencas_local" itemLabel="Licencas por local"/>
+                        </p:selectOneMenu>
+                        
                         <h:commandLink>
                             <f:setPropertyActionListener target="#{licencasMB.tiporelatorio}" value="1"/>
                             <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
@@ -22,19 +28,6 @@
                             <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
                             <h:graphicImage library="imagens" name="excel.png" title="Imprimir XLS"/>
                         </h:commandLink>
-                        <h:commandLink>
-                            <f:setPropertyActionListener target="#{licencasMB.tiporelatorio}" value="3"/>
-                            <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
-                            <h:graphicImage library="imagens" name="html.png" title="Imprimir HTML"/>
-                        </h:commandLink>
-                        <h:commandLink>
-                            <f:setPropertyActionListener target="#{licencasMB.tiporelatorio}" value=""/>
-                            <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
-                            <h:graphicImage library="imagens" name="ods.png" title="Imprimir ODS"/>
-                        </h:commandLink>
-                        <p:commandButton action="#{licencasMB.emitir}"
-                              value="Relatório PDF" immediate="true">
-                        </p:commandButton>
                     </h:form>
                 </h:panelGrid>
             </p:fieldset>
