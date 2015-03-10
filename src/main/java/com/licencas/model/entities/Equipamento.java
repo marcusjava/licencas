@@ -28,7 +28,7 @@ public class Equipamento implements Serializable {
     @Column(nullable = false,name = "equi_id")
     private Integer Id;
     
-    @Column(nullable = false, name = "equi_desc",length = 30)
+    @Column(nullable = false, name = "equi_desc",length = 50)
     private String descricao;
     
     

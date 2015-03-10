@@ -14,7 +14,7 @@
                     <p:growl id="msg" showDetail="true" autoUpdate="true"/>
                         <p:focus for="txt_desc"/>
                         <h:inputHidden value="#{comarcaMB.comarca.id}"/>
-                        <p:outputLabel value="Nome  "/>
+                        <p:outputLabel value="Nome.:  "/>
                         <p:inputText id="txt_desc" size="45" value="#{comarcaMB.comarca.com_desc}" required="true" requiredMessage="Campo obrigatorio" maxlength="45"/>&nbsp;
                         <p:commandButton id="botao" action="#{comarcaMB.Salvar}" image="ui-icon ui-icon-disk" value="Salvar" update=":form :formtabela:tabela" />
                  </h:form>       
@@ -40,7 +40,7 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width: 8%" headerText="Excluir">
-                            <p:commandLink action="#{comarcaMB.deletar}" immediate="true" update=":form :formtabela:tabela">
+                            <p:commandLink action="#{comarcaMB.deletar}" onclick="if (!confirm('Deseja realmente excluir #{com.com_desc}?'))return false;" immediate="true" update=":form :formtabela:tabela">
                                 <h:graphicImage library="imagens" name="excluir16.png"/>
                                 <f:setPropertyActionListener target="#{comarcaMB.comarca}" value="#{com}"/>
                             </p:commandLink>

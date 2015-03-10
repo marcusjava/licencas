@@ -28,6 +28,11 @@
                             <p:fileDownload value="#{licencasMB.arquivoretorno}"/>
                             <h:graphicImage library="imagens" name="excel.png" title="Imprimir XLS"/>
                         </h:commandLink>
+                        <h:commandLink>
+                            <f:setPropertyActionListener target="#{bemMB.tiporelatorio}" value="4"/>
+                            <p:fileDownload value="#{bemMB.arquivoretorno}"/>
+                            <h:graphicImage library="imagens" name="ods.png" title="Imprimir DOC"/>
+                        </h:commandLink>
                     </h:form>
                 </h:panelGrid>
             </p:fieldset>

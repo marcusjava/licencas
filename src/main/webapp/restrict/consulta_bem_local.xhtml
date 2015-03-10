@@ -26,7 +26,10 @@
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                          {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
-                         <p:column  headerText="Local"  filterMatchMode="contains" width="200">
+                         <p:column  headerText="Computador"  filterMatchMode="contains" width="200">
+                             <h:outputText value="#{bem.computador}"/>
+                        </p:column>
+                         <p:column  headerText="Pat."  filterMatchMode="contains" width="200">
                              <h:outputText value="#{bem.patrimonio}"/>
                         </p:column>
                         <p:column  headerText="Equipamento"  width="200">

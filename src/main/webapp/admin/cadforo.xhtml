@@ -55,7 +55,7 @@
                                 <p:rowEditor/>
                         </p:column>
                         <p:column style="width: 8%;" headerText="Excluir" >
-                            <p:commandLink action="#{foroMB.deletar}" immediate="true" update="tbforo :formforo:msg" >
+                            <p:commandLink action="#{foroMB.deletar}" onclick="if (!confirm('Deseja realmente excluir #{f.for_desc}?'))return false;" immediate="true" update="tbforo :formforo:msg" >
                                 <h:graphicImage library="imagens" name="excluir16.png"/>
                                 <f:setPropertyActionListener target="#{foroMB.foro}" value="#{f}"/>
                             </p:commandLink>

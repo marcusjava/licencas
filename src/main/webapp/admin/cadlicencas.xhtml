@@ -45,7 +45,7 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width: 8%" headerText="Excluir">
-                            <p:commandLink action="#{licencasMB.deletar}" value="Excluir" immediate="true" update=":form_tabela :form_licencas">
+                            <p:commandLink action="#{licencasMB.deletar}" onclick="if (!confirm('Deseja realmente excluir #{lic.lic_desc}?'))return false;" value="Excluir" immediate="true" update=":form_tabela :form_licencas">
                                 <f:setPropertyActionListener target="#{licencasMB.licenca}" value="#{lic}"/>
                             </p:commandLink>
                         </p:column>

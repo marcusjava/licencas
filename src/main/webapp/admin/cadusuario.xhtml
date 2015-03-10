@@ -14,21 +14,22 @@
                 <p:focus for="nome"/>
                 <h:inputHidden value="#{usuarioMB.usuario.codigo}"/>
                 <h:panelGrid columns="2" styleClass="panelGrid" cellpadding="10" id="panel_usuario">
-                    <h:outputText value="Nome"/>
+                    <h:outputText value="Nome.: "/>
                     <p:inputText id="nome" value="#{usuarioMB.usuario.nome}" required="true" requiredMessage="Campo nome obrigatorio" />
-                    <h:outputText value="E-mail"/>
+                    <h:outputText value="E-mail.: "/>
                     <p:inputText value="#{usuarioMB.usuario.email}" required="true" requiredMessage="Campo email obrigatorio"/>
-                    <h:outputText value="Login"/>
+                    <h:outputText value="Login.:"/>
                     <p:inputText value="#{usuarioMB.usuario.login}" required="true" requiredMessage="Campo login obrigatorio"/>
-                    <h:outputText value="Senha"/>
+                    <h:outputText value="Senha.:"/>
                     <p:password id="inpsenha" value="#{usuarioMB.senha}" redisplay="false" required="#{empty usuarioMB.usuario.senha}" requiredMessage="Campo senha obrigatorio!"/>
-                    <h:outputText value="Confirme a senha"/>
+                    <h:outputText value="Confirme a senha.:"/>
                     <p:password value="#{usuarioMB.confirmasenha}" required="#{empty usuarioMB.usuario.senha}" requiredMessage="Confirme a senha!"/>
-                    <h:outputText value="Papel"/>
+                    <h:outputText value="Papel.:"/>
                     <p:selectManyCheckbox id="basic" value="#{usuarioMB.papeis}" label="Papeis">
                         <f:selectItem itemLabel="Usuario" itemValue="ROLE_USUARIO"/>
                         <f:selectItem itemLabel="Administrador" itemValue="ROLE_ADMINISTRADOR"/>
                     </p:selectManyCheckbox>
+                    <h:outputText/>
                     <p:panel>
                         <p:commandButton action="#{usuarioMB.Salvar}" icon="ui-icon-disk" update=":form_usuario msgusuario :tabela_usuario" value="Salvar"/>
                         <p:commandButton type="reset" icon="ui-icon-cancel" value="Cancelar" update="form_usuario"/>

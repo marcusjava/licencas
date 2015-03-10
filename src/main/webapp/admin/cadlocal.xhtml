@@ -62,7 +62,7 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width: 5%" headerText="Excluir">
-                            <p:commandLink action="#{localMB.Deletar}" immediate="true" update="tb_local :form_local">
+                            <p:commandLink action="#{localMB.Deletar}" onclick="if (!confirm('Deseja realmente excluir #{loc.loc_desc}?'))return false;" immediate="true" update="tb_local :form_local">
                                 <h:graphicImage library="imagens" name="excluir16_1.png"/>
                                 <f:setPropertyActionListener target="#{localMB.localselec}" value="#{loc}"/>
                             </p:commandLink>

@@ -109,6 +109,7 @@ public class LocalMB implements Serializable{
         LocalRN localrn = new LocalRN();
         local.setLicencas(null);
         mensagem = localrn.addLocal(local);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         locais = null;
         novo();
         refresh();

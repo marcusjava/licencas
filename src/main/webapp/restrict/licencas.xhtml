@@ -16,14 +16,21 @@
                     <p:dataTable id="tabela" var="lic" value="#{licencasMB.licencas}" emptyMessage="Nenhum registro encontrado" filteredValue="#{licencasMB.filtro_licencas}" editable="true" paginator="true" rows="10" 
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15">
-                        <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 400px">
-                            <h:outputText value="#{lic.lic_desc}"/>
-                        </p:column>
-                        <p:column filterBy="#{lic.local.loc_desc}" headerText="Local"  filterMatchMode="contains" filterStyle="width: 400px">
+                             rowsPerPageTemplate="5,10,15" widgetVar="lictable">
+                        <p:column filterBy="#{lic.local.loc_desc}" headerText="Local"  filterMatchMode="contains" filterStyle="width: 200px" style="width: 300px">
                             <h:outputText value="#{lic.local.loc_desc}"/>
                         </p:column>
-                        <p:column headerText="Status" style="width: 100px">
+                        <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 200px" style="width: 200px">
+                            <h:outputText value="#{lic.lic_desc}"/>
+                        </p:column>
+                        <p:column headerText="Status" filterBy="#{lic.status}" filterMatchMode="equals" filterStyle="width: 150px"  style="width: 100px">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('lictable').filter()" >
+                                    <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="ATIVADA" itemValue="ATIVADA" />
+                                    <f:selectItem itemLabel="DESATIVADA" itemValue="DESATIVADA" />
+                                </p:selectOneMenu>
+                            </f:facet>
                             <h:outputText value="#{lic.status}"/>
                         </p:column>
                     </p:dataTable>

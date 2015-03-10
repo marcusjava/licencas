@@ -70,6 +70,7 @@ public class BemMB implements Serializable{
         mensagem = bemrn.Salvar(bem);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         init();
+        this.refresh();
         return null;
     }
     //metodo para buscar patrimonio

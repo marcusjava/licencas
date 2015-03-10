@@ -27,7 +27,7 @@
                                     itemLabel="#{local.loc_desc}" itemValue="#{local}" forceSelection="true" converter="converterlocal" />
                     <br/>
                     <br/>
-                    <p:commandButton rendered="#{bemMB.bem.id > 0}" value="Transferir" action="#{bemMB.Transferir}" icon="ui-icon-disk" update="form_trans"/>
+                    <p:commandButton rendered="#{bemMB.bem.id > 0}" value="Transferir" action="#{bemMB.Transferir}" icon="ui-icon-disk" update="@form"/>
                 
                 
             </h:form>

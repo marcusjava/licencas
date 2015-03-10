@@ -16,25 +16,25 @@
                 <br/>
                 <h:panelGrid columns="2" cellpadding="10" id="panelbens">
                     <h:outputLabel value="Local.: "/>
-                    <p:autoComplete style="width:300px" dropdown="true" value="#{bemMB.bem.local}" completeMethod="#{localMB.complete}" var="local" 
+                    <p:autoComplete style="width:600px" dropdown="true" value="#{bemMB.bem.local}" completeMethod="#{localMB.complete}" var="local" 
                                     itemLabel="#{local.loc_desc}" itemValue="#{local}" forceSelection="true" converter="converterlocal" />
                     
                     <h:outputText value="Equipamento.: "/>
                     <p:autoComplete dropdown="true" value="#{bemMB.bem.equipamento}" completeMethod="#{equipamentoMB.complete}"
-                                    var="equi" itemLabel="#{equi.descricao}" itemValue="#{equi}" forceSelection="true" converter="equipamentoconverter"/>
+                                    style="width:600px" var="equi" itemLabel="#{equi.descricao}" itemValue="#{equi}" forceSelection="true" converter="equipamentoconverter"/>
                    
                     <h:outputText value="Patrimonio.: "/>
-                    <p:inputText value="#{bemMB.bem.patrimonio}" />
+                    <p:inputText value="#{bemMB.bem.patrimonio}" style="width:100px" size="6" maxlength="6"/>
                     
                     <h:outputText value="Serial.: "/>
                     <p:inputText value="#{bemMB.bem.serial}" />
                     
                     <h:outputText value="Nome do computador.: "/>
-                    <p:inputText value="#{bemMB.bem.computador}" /> 
+                    <p:inputText value="#{bemMB.bem.computador}" onkeyup="this.value = this.value.toUpperCase()"/> 
                     <h:outputText value=""/>
                     * Se o equipamento for computador informar o nome
-                    
-                    <p:panel>
+                    <h:outputText/>
+                    <p:panel style="width: 300px">
                         <p:commandButton action="#{bemMB.Salvar}" value="Salvar" label="Salvar" icon="ui-icon-disk" update=":form_bens_local"/>
                         <p:commandButton type="reset" value="Limpar" icon="ui-icon-trash"/>
                     </p:panel>

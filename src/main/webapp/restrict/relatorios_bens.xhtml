@@ -11,8 +11,8 @@
             <p:fieldset legend="Relatorios de Bens">
                 <h:panelGrid columns="4">
                     <h:form id="form_relatorios">
-                        <p:messages id="msg_relatorios"/>
-                        <p:selectOneMenu value="#{bemMB.nomerelatorio}" style="width: 200px">
+                        <p:growl id="msg_relatorios" showDetail="false"/>
+                        <p:selectOneMenu value="#{bemMB.nomerelatorio}" style="width: 200px" required="true" requiredMessage="Selecione o relatorio">
                             <f:selectItem itemValue="" itemLabel="Selecione"/>
                             <f:selectItem itemValue="bens_local" itemLabel="Bens por Local"/>
                             <f:selectItem itemValue="licencas_local" itemLabel="Licencas por local"/>
@@ -27,6 +27,11 @@
                             <f:setPropertyActionListener target="#{bemMB.tiporelatorio}" value="2"/>
                             <p:fileDownload value="#{bemMB.arquivoretorno}"/>
                             <h:graphicImage library="imagens" name="excel.png" title="Imprimir XLS"/>
+                        </h:commandLink>
+                        <h:commandLink>
+                            <f:setPropertyActionListener target="#{bemMB.tiporelatorio}" value="4"/>
+                            <p:fileDownload value="#{bemMB.arquivoretorno}"/>
+                            <h:graphicImage library="imagens" name="ods.png" title="Imprimir DOC"/>
                         </h:commandLink>
                     </h:form>
                 </h:panelGrid>
