@@ -16,7 +16,7 @@
                 <p:focus for="inp_licencas"/>
                 <h:panelGrid columns="2" styleClass="panelGrid">
                     <h:outputText value="Descrição.:" id="out_lic"/>
-                    <p:inputText  id="inp_licencas" value="#{licencasMB.licenca.lic_desc}" style="width: 250px" size="16" maxlength="16" required="true" requiredMessage="Campo origatorio" onkeyup="this.value = this.value.toUpperCase()"/>
+                    <p:inputText  id="inp_licencas" value="#{licencasMB.licenca.lic_desc}" style="width: 250px" size="19" maxlength="19" required="true" requiredMessage="Campo origatorio" onkeyup="this.value = this.value.toUpperCase()"/>
                     <h:outputText value=""/>
                     <p:panel>
                         <p:commandButton id="bt_salvar" action="#{licencasMB.Salvar}" icon="ui-icon-disk" value="Salvar" update="msglic :form_licencas :form_tabela"/>

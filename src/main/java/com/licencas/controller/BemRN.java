@@ -49,7 +49,7 @@ public class BemRN {
             {
                 try
                 {
-                    bemDAO().update(bem);
+                    bemDAO().merge(bem);
                     return "Bem atualizado com sucesso";
                 }catch(Exception e)
                 {

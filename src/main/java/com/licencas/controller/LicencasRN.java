@@ -125,7 +125,7 @@ public class LicencasRN {
             try
             {
                 selecionada.setStatus("DESATIVADA");
-                selecionada.setLocal(null);
+                selecionada.setBem(null);
                 licencaDAO().merge(selecionada);
                 return "Licenca liberada com sucesso";
             }catch(Exception e)

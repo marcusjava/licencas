@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +33,10 @@ public class Bem implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn
     private Equipamento equipamento;
+    
+    @OneToOne(optional = true)
+    @JoinColumn(name = "licenca_id")
+    private Licencas licenca;
     
     @ManyToOne(optional = false)
     @JoinColumn
@@ -96,16 +101,24 @@ public class Bem implements Serializable {
         this.computador = computador;
     }
 
-    
-    
+    public Licencas getLicenca() {
+        return licenca;
+    }
+
+    public void setLicenca(Licencas licenca) {
+        this.licenca = licenca;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + (this.Id != null ? this.Id.hashCode() : 0);
-        hash = 59 * hash + (this.equipamento != null ? this.equipamento.hashCode() : 0);
-        hash = 59 * hash + (this.local != null ? this.local.hashCode() : 0);
-        hash = 59 * hash + (this.patrimonio != null ? this.patrimonio.hashCode() : 0);
-        hash = 59 * hash + (this.serial != null ? this.serial.hashCode() : 0);
+        int hash = 7;
+        hash = 23 * hash + (this.Id != null ? this.Id.hashCode() : 0);
+        hash = 23 * hash + (this.equipamento != null ? this.equipamento.hashCode() : 0);
+        hash = 23 * hash + (this.licenca != null ? this.licenca.hashCode() : 0);
+        hash = 23 * hash + (this.local != null ? this.local.hashCode() : 0);
+        hash = 23 * hash + (this.patrimonio != null ? this.patrimonio.hashCode() : 0);
+        hash = 23 * hash + (this.serial != null ? this.serial.hashCode() : 0);
+        hash = 23 * hash + (this.computador != null ? this.computador.hashCode() : 0);
         return hash;
     }
 
@@ -124,6 +137,9 @@ public class Bem implements Serializable {
         if (this.equipamento != other.equipamento && (this.equipamento == null || !this.equipamento.equals(other.equipamento))) {
             return false;
         }
+        if (this.licenca != other.licenca && (this.licenca == null || !this.licenca.equals(other.licenca))) {
+            return false;
+        }
         if (this.local != other.local && (this.local == null || !this.local.equals(other.local))) {
             return false;
         }
@@ -133,8 +149,15 @@ public class Bem implements Serializable {
         if ((this.serial == null) ? (other.serial != null) : !this.serial.equals(other.serial)) {
             return false;
         }
+        if ((this.computador == null) ? (other.computador != null) : !this.computador.equals(other.computador)) {
+            return false;
+        }
         return true;
     }
+
+    
+    
+    
 
     
     

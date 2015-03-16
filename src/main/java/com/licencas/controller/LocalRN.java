@@ -40,8 +40,7 @@ public class LocalRN {
    {
        if (local.getId() == null || local.getId() == 0 )
        {
-           if(!pesqcampounico(local))
-           {
+           
                 try
                 {
                    LocalDAO().save(local);
@@ -51,11 +50,7 @@ public class LocalRN {
                     return "Ocorreu um erro:" + e.getMessage();
                 }
                 
-           }
-           else
-           {
-               return "Local já cadastrado!";
-           }
+           
        }
        else
        {

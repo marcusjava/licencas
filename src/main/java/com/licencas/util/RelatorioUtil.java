@@ -1,7 +1,5 @@
 package com.licencas.util;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,7 +43,7 @@ public class RelatorioUtil {
 		try {
 			FacesContext context = FacesContext.getCurrentInstance();
 			Connection conexao = this.getConexao();
-			String caminhoRelatorio = context.getExternalContext().getRealPath("relatorios");
+			String caminhoRelatorio = "C://Apache Tomcat 8.0.3/webapps/Licencas_Web/relatorios";
 			String caminhoArquivoJasper = caminhoRelatorio + File.separator + nomeRelatorioJasper + ".jasper";
                         File file = new File(caminhoArquivoJasper);
                         file = file.getAbsoluteFile();

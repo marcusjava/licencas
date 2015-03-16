@@ -8,6 +8,7 @@ package com.licencas.view;
 import com.licencas.controller.BemRN;
 import com.licencas.controller.UsuarioRN;
 import com.licencas.model.entities.Bem;
+import com.licencas.model.entities.Licencas;
 import com.licencas.model.entities.Local;
 import com.licencas.model.entities.Usuario;
 import com.licencas.util.RelatorioUtil;
@@ -36,8 +37,6 @@ import org.primefaces.model.StreamedContent;
 @ViewScoped
 public class BemMB implements Serializable{
     private static final long serialVersionUID = 1L;
-    
-    
     private Bem bem;
     private List<Bem> bens;
     private List<Bem> filtro_bens;
@@ -47,6 +46,7 @@ public class BemMB implements Serializable{
     private Local novo_local;
     private String patrimonio;
     private Local local;
+    private Licencas licenca;
     
     //Informaçoes para o relatorio jasper
     private StreamedContent arquivoretorno;
@@ -60,6 +60,7 @@ public class BemMB implements Serializable{
         BemRN bemrn = new BemRN();
         bens = bemrn.todos();
         filtro_bens = bemrn.todos();
+        bem.setLicenca(new Licencas());
         bem = new Bem();
     }
     
@@ -67,6 +68,8 @@ public class BemMB implements Serializable{
     public String Salvar()
     {
         BemRN bemrn = new BemRN();
+        licenca.setStatus("ATIVADA");
+        bem.setLicenca(licenca);
         mensagem = bemrn.Salvar(bem);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         init();
@@ -227,6 +230,14 @@ public class BemMB implements Serializable{
 
     public void setNomerelatorio(String nomerelatorio) {
         this.nomerelatorio = nomerelatorio;
+    }
+
+    public Licencas getLicenca() {
+        return licenca;
+    }
+
+    public void setLicenca(Licencas licenca) {
+        this.licenca = licenca;
     }
      
     
