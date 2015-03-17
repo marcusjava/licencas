@@ -39,7 +39,7 @@ public class LicencasRN {
                 {
                     try
                     {
-                         licenca.setLocal(null);
+                         licenca.setBem(null);
                          licenca.setStatus("DESATIVADA");
                          licencaDAO().save(licenca);
                          return "Licenca salva com sucesso!";
@@ -76,21 +76,7 @@ public class LicencasRN {
        return campounico != null;
    }
    
-   public String AdicionaLocal(Licencas licenca, Local local)
-   {
-     try
-     {
-         licenca.setLocal(local);
-         licenca.setStatus("ATIVADA");
-         licencaDAO().merge(licenca);
-         return "Licenca atualizada com sucesso";
-         
-     }catch(Exception e)
-     {
-         return "Ocorreu um erro" + e.getMessage();
-     }
-          
-   }
+   
    
    public String deleteLicencas(Licencas licenca)
    {

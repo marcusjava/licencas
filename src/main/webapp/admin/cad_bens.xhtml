@@ -26,8 +26,6 @@
                     <p:inputText value="#{bemMB.bem.serial}" style="width:300px" />
                     <h:outputText value="Nome do computador.: "/>
                     <p:inputText value="#{bemMB.bem.computador}" onkeyup="this.value = this.value.toUpperCase()"/> 
-                    <p:commandButton value="Licença" onclick = "PF('dialoglicencas').show();"/>
-                    <h:outputText rendered="#{bemMB.licenca != null}" value="#{bemMB.licenca.lic_desc}"/>
                 </h:panelGrid>
                     <p:panel style="width: 300px">
                         <p:commandButton action="#{bemMB.Salvar}" value="Salvar" label="Salvar" icon="ui-icon-disk" update=":form_bens_local :form_tb_bens"/>
@@ -90,27 +88,6 @@
                 
             </h:form>
         </p:fieldset>
-        <p:dialog header="Licenças" widgetVar="dialoglicencas" resizable="true" modal="false" width="700">
-                    <h:form id="form_licenca">
-                        <p:dataTable id="tabela_licencas" var="lic" value="#{licencasMB.desativadas}" emptyMessage="Nenhum registro encontrado" filteredValue="#{licencasMB.filtro_desativadas}" editable="true" paginator="true" rows="3" 
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
-                                 {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="5,10,15" selection="#{bemMB.licenca}" rowKey="#{lic.id}">
-                                <p:column selectionMode="single" style="width:16px;text-align:center" />
-                                <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
-                                    <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{lic.lic_desc}"/></f:facet>
-                                        <f:facet name="input"><p:inputText id="txtdesc" value="#{lic.lic_desc}" style="width:100% " label="Descricao"/></f:facet>
-                                    </p:cellEditor>
-                                </p:column>
-                                <p:column headerText="Status" width="110" style="text-align: center">
-                                    <h:outputText value="#{lic.status}"/>
-                                </p:column> 
-                        </p:dataTable>
-                        <p:commandButton onclick="PF('dialoglicencas').hide();" value="Retornar" update=":form_bens_local"/>
-                    </h:form>
-            
-        </p:dialog>
     </ui:define>
     
             

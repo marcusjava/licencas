@@ -31,13 +31,10 @@ public class Local implements Serializable{
     private String loc_desc;
     
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @ForeignKey(name = "foro_local")
     @JoinColumn(name = "for_id", referencedColumnName = "for_id")
     private Foro foro;
-    
-    @OneToMany(mappedBy = "local",fetch = FetchType.LAZY)
-    private List<Licencas> licencas;
     
     @OneToMany(mappedBy = "local",fetch = FetchType.LAZY)
     private List<Bem> bens;
@@ -66,13 +63,7 @@ public class Local implements Serializable{
         this.foro = foro;
     }
 
-    public List<Licencas> getLicencas() {
-        return licencas;
-    }
-
-    public void setLicencas(List<Licencas> licencas) {
-        this.licencas = licencas;
-    }
+    
 
     public List<Bem> getBens() {
         return bens;
@@ -84,12 +75,11 @@ public class Local implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.loc_desc != null ? this.loc_desc.hashCode() : 0);
-        hash = 97 * hash + (this.foro != null ? this.foro.hashCode() : 0);
-        hash = 97 * hash + (this.licencas != null ? this.licencas.hashCode() : 0);
-        hash = 97 * hash + (this.bens != null ? this.bens.hashCode() : 0);
+        int hash = 7;
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 89 * hash + (this.loc_desc != null ? this.loc_desc.hashCode() : 0);
+        hash = 89 * hash + (this.foro != null ? this.foro.hashCode() : 0);
+        hash = 89 * hash + (this.bens != null ? this.bens.hashCode() : 0);
         return hash;
     }
 
@@ -111,15 +101,13 @@ public class Local implements Serializable{
         if (this.foro != other.foro && (this.foro == null || !this.foro.equals(other.foro))) {
             return false;
         }
-        if (this.licencas != other.licencas && (this.licencas == null || !this.licencas.equals(other.licencas))) {
-            return false;
-        }
         if (this.bens != other.bens && (this.bens == null || !this.bens.equals(other.bens))) {
             return false;
         }
         return true;
     }
 
+    
     
 
 }

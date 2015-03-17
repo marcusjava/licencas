@@ -66,6 +66,12 @@ public class BemRN {
         Bem unico = bemDAO().getCampoUnico(hql, bem.getPatrimonio());
         return unico!=null;
     }
+    
+    public List<Bem> pesqcomputador()
+    {
+        String hql = ("Select b from Bem b where b.computador != ''");
+        return bemDAO().getListByQuery(hql);
+    }
     public String Deletar(Bem bem)
     {
         try

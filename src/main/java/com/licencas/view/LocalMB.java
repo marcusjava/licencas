@@ -107,7 +107,6 @@ public class LocalMB implements Serializable{
     public String Salvar()
     {
         LocalRN localrn = new LocalRN();
-        local.setLicencas(null);
         mensagem = localrn.addLocal(local);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         locais = null;
@@ -117,17 +116,7 @@ public class LocalMB implements Serializable{
        
     }
     
-    //Atribui a licenca ao local
-    public String SalvarLicenca()
-    {
-        LocalRN localrn = new LocalRN();
-        LicencasRN licencarn = new LicencasRN();
-        mensagem = licencarn.AdicionaLocal(licenca, local);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
-        novo();
-        refresh();
-        return null;
-    }
+    
     
     public String Deletar()
     {

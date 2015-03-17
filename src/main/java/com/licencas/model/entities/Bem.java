@@ -6,6 +6,7 @@
 package com.licencas.model.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,11 +35,11 @@ public class Bem implements Serializable {
     @JoinColumn
     private Equipamento equipamento;
     
-    @OneToOne(optional = true)
+    @OneToOne(optional = true,cascade = CascadeType.MERGE)
     @JoinColumn(name = "licenca_id")
     private Licencas licenca;
     
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.MERGE)
     @JoinColumn
     private Local local;
     

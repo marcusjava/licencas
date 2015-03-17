@@ -42,13 +42,15 @@ public class BemMB implements Serializable{
     private List<Bem> filtro_bens;
     private List<Bem> pesq_pat;
     private List<Bem> pesq_local;
+    private List<Bem> pesq_comp;
+    private List<Bem> filtro_pesq_comp;
     private String mensagem;
     private Local novo_local;
     private String patrimonio;
     private Local local;
     private Licencas licenca;
     
-    //Informaçoes para o relatorio jasper
+    //InformaÃ§oes para o relatorio jasper
     private StreamedContent arquivoretorno;
     private int tiporelatorio;
     private String nomerelatorio;
@@ -60,7 +62,7 @@ public class BemMB implements Serializable{
         BemRN bemrn = new BemRN();
         bens = bemrn.todos();
         filtro_bens = bemrn.todos();
-        bem.setLicenca(new Licencas());
+        licenca = new Licencas();
         bem = new Bem();
     }
     
@@ -68,8 +70,6 @@ public class BemMB implements Serializable{
     public String Salvar()
     {
         BemRN bemrn = new BemRN();
-        licenca.setStatus("ATIVADA");
-        bem.setLicenca(licenca);
         mensagem = bemrn.Salvar(bem);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
         init();
@@ -84,7 +84,7 @@ public class BemMB implements Serializable{
         pesq_pat = bemrn.ListaPatrimonio(patrimonio);
         if(bem == null || pesq_pat == null)
         {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Patrimonio não cadastrado!",""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Patrimonio nÃ£o cadastrado!",""));
             init();
         }
     }
@@ -238,6 +238,24 @@ public class BemMB implements Serializable{
 
     public void setLicenca(Licencas licenca) {
         this.licenca = licenca;
+    }
+
+    public List<Bem> getPesq_comp() {
+       BemRN bemrn = new BemRN();
+        return pesq_comp = bemrn.pesqcomputador();
+    }
+
+    public void setPesq_comp(List<Bem> pesq_comp) {
+        this.pesq_comp = pesq_comp;
+    }
+
+    public List<Bem> getFiltro_pesq_comp() {
+        BemRN bemrn = new BemRN();
+        return filtro_pesq_comp = bemrn.pesqcomputador();
+    }
+
+    public void setFiltro_pesq_comp(List<Bem> filtro_pesq_comp) {
+        this.filtro_pesq_comp = filtro_pesq_comp;
     }
      
     

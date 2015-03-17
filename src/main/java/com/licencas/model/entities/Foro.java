@@ -8,6 +8,7 @@ package com.licencas.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public class Foro implements Serializable{
     @Column(nullable = false,length = 45,unique = true)
     private String for_desc;
     
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.MERGE)
     @ForeignKey(name = "foro_comarca")
     @JoinColumn(name = "com_id",referencedColumnName = "com_id")
     private Comarca comarca;

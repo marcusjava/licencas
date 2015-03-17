@@ -17,10 +17,16 @@
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15" widgetVar="lictable">
-                        <p:column filterBy="#{lic.local.loc_desc}" headerText="Local"  filterMatchMode="contains" filterStyle="width: 200px" style="width: 300px">
-                            <h:outputText value="#{lic.local.loc_desc}"/>
+                        <p:column filterBy="#{lic.bem.local.loc_desc}" headerText="Local"  filterMatchMode="contains" filterStyle="width: 200px" style="width: 200px">
+                            <h:outputText value="#{lic.bem.local.loc_desc}"/>
                         </p:column>
-                        <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 200px" style="width: 200px">
+                        <p:column filterBy="#{lic.bem.equipamento.descricao}" headerText="Computador"  filterMatchMode="contains" filterStyle="width: 150px" style="width: 150px">
+                            <h:outputText value="#{lic.bem.equipamento.descricao}"/>
+                        </p:column>
+                        <p:column filterBy="#{lic.bem.computador}" headerText="Nome"  filterMatchMode="contains" filterStyle="width: 100px" style="width: 120px">
+                            <h:outputText value="#{lic.bem.computador}"/>
+                        </p:column>
+                        <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 200px" style="width: 100px">
                             <h:outputText value="#{lic.lic_desc}"/>
                         </p:column>
                         <p:column headerText="Status" filterBy="#{lic.status}" filterMatchMode="equals" filterStyle="width: 150px"  style="width: 100px">

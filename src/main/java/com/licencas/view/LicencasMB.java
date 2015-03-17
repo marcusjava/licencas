@@ -64,7 +64,7 @@ public class LicencasMB implements Serializable{
         ativadas = licencarn.listaAtivadas();
         filtro_ativadas = licencarn.listaAtivadas();
         selecionada = new Licencas();
-        licenca.setLocal(new Local());
+        
         
     }
     

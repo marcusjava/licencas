@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../resources/templates/principal.xhtml"
+                    xmlns:f="http://java.sun.com/jsf/core">
+        <ui:define name="centro">
+            
+            <p:fieldset legend="Atribuir licenças ao local" id="field">
+                <h:form id="form_atrib">
+                    <p:growl id="msg_atri" showDetail="true"/>
+                    <p:dataTable id="bens" var="bem" value="#{bemMB.bens}" emptyMessage="Nenhum registro encontrado" filteredValue="#{bemMB.filtro_bens}" editable="true" paginator="true" rows="3" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" selection="#{bemMB.bem}" rowKey="#{bem.id}">
+                        <p:column selectionMode="single" style="width:16px;text-align:center" />
+                        <p:column filterBy="#{bem.local.loc_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{bem.local.loc_desc}"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{bem.local.loc_desc}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{bem.equipamento.descricao}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{bem.equipamento.descricao}"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{bem.equipamento.descricao}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{bem.computador}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{bem.computador}"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{bem.computador}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column filterBy="#{bem.patrimonio}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{bem.patrimonio}"/></f:facet>
+                                <f:facet name="input"><p:inputText  value="#{bem.patrimonio}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                    </p:dataTable>
+                 
+                    <p:dataTable id="tabela" var="lic" value="#{licencasMB.desativadas}" emptyMessage="Nenhum registro encontrado" filteredValue="#{licencasMB.filtro_desativadas}" editable="true" paginator="true" rows="3" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" selection="#{bemMB.licenca}" rowKey="#{lic.id}">
+                        <p:column selectionMode="single" style="width:16px;text-align:center" />
+                        <p:column filterBy="#{lic.lic_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lic.lic_desc}"/></f:facet>
+                                <f:facet name="input"><p:inputText id="txtdesc" value="#{lic.lic_desc}" style="width:100% " label="Descricao"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Status" width="110" style="text-align: center">
+                            <h:outputText value="#{lic.status}"/>
+                        </p:column> 
+                    </p:dataTable>
+                </h:form>
+            </p:fieldset>
+            
+        </ui:define>
+    </ui:composition>

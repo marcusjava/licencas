@@ -29,10 +29,6 @@ public class Licencas implements Serializable{
     @Column(name = "lic_status",nullable = false)
     private String status;
     
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "loc_id" , referencedColumnName = "loc_id")
-    private Local local;
-    
     @OneToOne(mappedBy = "licenca")
     private Bem bem;
 
@@ -62,13 +58,7 @@ public class Licencas implements Serializable{
         this.status = status;
     }
 
-    public Local getLocal() {
-        return local;
-    }
-
-    public void setLocal(Local local) {
-        this.local = local;
-    }
+   
 
     public Bem getBem() {
         return bem;
@@ -80,12 +70,11 @@ public class Licencas implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 53 * hash + (this.lic_desc != null ? this.lic_desc.hashCode() : 0);
-        hash = 53 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 53 * hash + (this.local != null ? this.local.hashCode() : 0);
-        hash = 53 * hash + (this.bem != null ? this.bem.hashCode() : 0);
+        int hash = 7;
+        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 41 * hash + (this.lic_desc != null ? this.lic_desc.hashCode() : 0);
+        hash = 41 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 41 * hash + (this.bem != null ? this.bem.hashCode() : 0);
         return hash;
     }
 
@@ -107,16 +96,12 @@ public class Licencas implements Serializable{
         if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
             return false;
         }
-        if (this.local != other.local && (this.local == null || !this.local.equals(other.local))) {
-            return false;
-        }
         if (this.bem != other.bem && (this.bem == null || !this.bem.equals(other.bem))) {
             return false;
         }
         return true;
     }
 
-    
     
     
     
