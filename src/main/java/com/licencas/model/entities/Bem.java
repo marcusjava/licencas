@@ -36,7 +36,7 @@ public class Bem implements Serializable {
     private Equipamento equipamento;
     
     @OneToOne(optional = true,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "licenca_id")
+    @JoinColumn(name = "lic_id",referencedColumnName = "lic_id")
     private Licencas licenca;
     
     @ManyToOne(optional = false,cascade = CascadeType.MERGE)

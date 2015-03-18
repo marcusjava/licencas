@@ -196,10 +196,25 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
     public List<T> getListByLocal(String hql, Local local) {
         Criteria crit = session.createCriteria(Bem.class);
         crit.add(Restrictions.eq("local",local));
-        //Query q = session.createQuery(hql);
-        //q.setParameter("local", local);
         return crit.list();
     
+    }
+
+    @Override
+    public List<T> getListBySqlQuery(String query) {
+        SQLQuery q = session.createSQLQuery(query);
+        q.addEntity(classe);
+        return q.list();
+    
+    }
+    
+    
+    //busca todos os computadores
+    @Override
+    public List<T> getListByComput() {
+        Criteria crit = session.createCriteria(Bem.class);
+        crit.add(Restrictions.and(Restrictions.ne("computador",""),Restrictions.isNotNull("computador")));
+        return crit.list();
     }
 }
 

@@ -39,5 +39,7 @@ public interface InterfaceDAO<T> {
     List<T> getLisByPatrimonio(String hql,String patrimonio);
     //pesquisa de bens pelo local
     List<T> getListByLocal(String hql,Local local);
+    List<T> getListBySqlQuery(String query);
+    List<T> getListByComput();
     
 }

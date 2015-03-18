@@ -69,8 +69,7 @@ public class BemRN {
     
     public List<Bem> pesqcomputador()
     {
-        String hql = ("Select b from Bem b where b.computador != ''");
-        return bemDAO().getListByQuery(hql);
+        return bemDAO().getListByComput();
     }
     public String Deletar(Bem bem)
     {

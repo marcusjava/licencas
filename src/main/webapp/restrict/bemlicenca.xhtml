@@ -12,11 +12,10 @@
             <p:fieldset legend="Atribuir licenças ao local" id="field">
                 <h:form id="form_atrib">
                     <p:growl id="msg_atri" showDetail="true"/>
-                    <p:dataTable id="bens" var="bem" value="#{bemMB.bens}" emptyMessage="Nenhum registro encontrado" filteredValue="#{bemMB.filtro_bens}" editable="true" paginator="true" rows="3" 
+                    <p:dataTable id="bens" var="bem" value="#{bemMB.pesq_comp}" emptyMessage="Nenhum registro encontrado" filteredValue="#{bemMB.filtro_pesq_comp}" editable="true" paginator="true" rows="3" 
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                          {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15" selection="#{bemMB.bem}" rowKey="#{bem.id}">
-                        <p:column selectionMode="single" style="width:16px;text-align:center" />
+                         rowsPerPageTemplate="5,10,15">
                         <p:column filterBy="#{bem.local.loc_desc}" headerText="Descricao"  filterMatchMode="contains" filterStyle="width: 300px" width="200">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{bem.local.loc_desc}"/></f:facet>
