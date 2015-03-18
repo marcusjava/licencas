@@ -40,7 +40,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column style="width: 8%" headerText="Liberar">
-                                <p:commandLink action="#{licencasMB.Liberar}" onclick="if (!confirm('Deseja realmente liberar #{lic.lic_desc} do local #{lic.local.loc_desc}?'))return false;" value="Liberar" immediate="true" update=":form_liblicenca">
+                                <p:commandLink action="#{licencasMB.Liberar}" onclick="if (!confirm('Deseja realmente liberar #{lic.lic_desc} do local #{lic.bem.local.loc_desc}?'))return false;" value="Liberar" immediate="true" update=":form_liblicenca">
                                     <f:setPropertyActionListener target="#{licencasMB.selecionada}" value="#{lic}"/>
                                 </p:commandLink>
                             </p:column>

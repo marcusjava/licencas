@@ -64,6 +64,8 @@ public class BemMB implements Serializable{
         filtro_bens = bemrn.todos();
         licenca = new Licencas();
         bem = new Bem();
+        pesq_comp = bemrn.pesqcomputador();
+        filtro_pesq_comp = bemrn.pesqcomputador();
     }
     
     
@@ -87,6 +89,23 @@ public class BemMB implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Patrimonio nÃ£o cadastrado!",""));
             init();
         }
+    }
+    
+    public String InserirLicenca()
+    {
+        BemRN bemrn = new BemRN();
+        if (licenca != null && bem != null)
+        {
+            mensagem = bemrn.InsereLicenca(licenca, bem);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
+        }else
+        {
+            mensagem = "Selecionar o bem e/ou licença";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,""));
+        }
+        init();
+        this.refresh();
+        return null;
     }
     
     //JasperReports
@@ -242,7 +261,7 @@ public class BemMB implements Serializable{
 
     public List<Bem> getPesq_comp() {
        BemRN bemrn = new BemRN();
-        return pesq_comp = bemrn.pesqcomputador();
+        return pesq_comp;
     }
 
     public void setPesq_comp(List<Bem> pesq_comp) {
@@ -251,7 +270,7 @@ public class BemMB implements Serializable{
 
     public List<Bem> getFiltro_pesq_comp() {
         BemRN bemrn = new BemRN();
-        return filtro_pesq_comp = bemrn.pesqcomputador();
+        return filtro_pesq_comp;
     }
 
     public void setFiltro_pesq_comp(List<Bem> filtro_pesq_comp) {

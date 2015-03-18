@@ -29,7 +29,7 @@ public class Licencas implements Serializable{
     @Column(name = "lic_status",nullable = false)
     private String status;
     
-    @OneToOne(mappedBy = "licenca")
+    @OneToOne(mappedBy = "licenca",cascade = CascadeType.ALL )
     private Bem bem;
 
     public Integer getId() {

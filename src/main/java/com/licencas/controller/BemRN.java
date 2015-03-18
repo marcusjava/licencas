@@ -8,6 +8,7 @@ package com.licencas.controller;
 import com.licencas.model.dao.HibernateDAO;
 import com.licencas.model.dao.InterfaceDAO;
 import com.licencas.model.entities.Bem;
+import com.licencas.model.entities.Licencas;
 import com.licencas.model.entities.Local;
 import com.licencas.util.FacesContextUtil;
 import java.util.List;
@@ -26,8 +27,6 @@ public class BemRN {
     }
     public String Salvar(Bem bem)
     {
-       
-            
             if(bem.getId() == null || bem.getId() == 0)
             {
                  if(!pesqcampounico(bem))
@@ -59,7 +58,26 @@ public class BemRN {
         
     }
     
-    
+    public String InsereLicenca(Licencas licenca,Bem bem)
+    {
+        try
+        {
+          if(bem.getLicenca() == null)
+          {
+              licenca.setStatus("ATIVADA");
+              bem.setLicenca(licenca);
+              bemDAO().merge(bem);
+              return "Licença inserida com sucesso!";
+          }else
+          {
+              return "Bem ja possui licença cadastrada!";
+          }
+        }catch(Exception e)
+        {
+            return "Ocorreu um erro :" + e.getMessage();
+        }
+        
+    }
     private Boolean pesqcampounico(Bem bem)
     {
         String hql = "Select b from Bem b where b.patrimonio = :desc";
